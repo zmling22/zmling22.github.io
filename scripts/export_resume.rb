@@ -21,17 +21,31 @@ SECTION_KEYS = {
 }.freeze
 
 def latex_escape(text)
-  text.to_s
-      .gsub("\\", "\\textbackslash{}")
-      .gsub("&", "\\&")
-      .gsub("%", "\\%")
-      .gsub("$", "\\$")
-      .gsub("#", "\\#")
-      .gsub("_", "\\_")
-      .gsub("{", "\\{")
-      .gsub("}", "\\}")
-      .gsub("~", "\\textasciitilde{}")
-      .gsub("^", "\\textasciicircum{}")
+  replacements = {
+    "\\" => "\\textbackslash{}",
+    "&" => "\\&",
+    "%" => "\\%",
+    "$" => "\\$",
+    "#" => "\\#",
+    "_" => "\\_",
+    "{" => "\\{",
+    "}" => "\\}",
+    "~" => "\\textasciitilde{}",
+    "^" => "\\textasciicircum{}"
+  }
+  text.to_s.each_char.map { |char| replacements.fetch(char, char) }.join
+end
+
+def latex_url_escape(url)
+  replacements = {
+    "\\" => "\\textbackslash{}",
+    "%" => "\\%",
+    "#" => "\\#",
+    "&" => "\\&",
+    "{" => "\\{",
+    "}" => "\\}"
+  }
+  url.to_s.each_char.map { |char| replacements.fetch(char, char) }.join
 end
 
 def inline_md_to_latex(text)
@@ -47,13 +61,13 @@ def inline_md_to_latex(text)
   value = value.gsub(%r{<img[^>]*>}, "")
   value = value.gsub(%r{<a\s+href="([^"]+)"[^>]*>(.*?)</a>}m) do
     label = inline_md_to_latex(Regexp.last_match(2))
-    label.empty? ? "" : protect.call("\\href{#{Regexp.last_match(1)}}{#{label}}")
+    label.empty? ? "" : protect.call("\\href{#{latex_url_escape(Regexp.last_match(1))}}{#{label}}")
   end
   value = value.gsub(/\[\[([^\]]+)\]\]\(([^)]+)\)/) do
-    protect.call("\\href{#{Regexp.last_match(2)}}{[#{latex_escape(Regexp.last_match(1))}]}")
+    protect.call("\\href{#{latex_url_escape(Regexp.last_match(2))}}{[#{latex_escape(Regexp.last_match(1))}]}")
   end
   value = value.gsub(/\[([^\]]+)\]\(([^)]+)\)/) do
-    protect.call("\\href{#{Regexp.last_match(2)}}{#{latex_escape(Regexp.last_match(1))}}")
+    protect.call("\\href{#{latex_url_escape(Regexp.last_match(2))}}{#{latex_escape(Regexp.last_match(1))}}")
   end
   value = value.gsub(/\*\*([^*]+)\*\*/) { protect.call("\\textbf{#{latex_escape(Regexp.last_match(1))}}") }
   value = value.gsub(/\*([^*]+)\*/) { protect.call("\\textit{#{latex_escape(Regexp.last_match(1))}}") }
@@ -61,7 +75,7 @@ def inline_md_to_latex(text)
   value = value.gsub(%r{</?[^>]+>}, "")
 
   escaped = latex_escape(value)
-  protected.each_with_index { |latex, index| escaped = escaped.gsub("@@LATEX#{index}@@", latex) }
+  protected.each_with_index { |latex, index| escaped = escaped.gsub("@@LATEX#{index}@@") { latex } }
   escaped
 end
 
@@ -182,7 +196,7 @@ def build_tex(config, sections)
 
     \\begin{center}
       {\\LARGE\\bfseries #{latex_escape(name)}}\\\\[0.4em]
-      #{[email && "\\href{mailto:#{email}}{#{latex_escape(email)}}", scholar && "\\href{#{scholar}}{Google Scholar}", location && latex_escape(location), bio && latex_escape(bio)].compact.join(" \\quad ")}
+      #{[email && "\\href{mailto:#{latex_url_escape(email)}}{#{latex_escape(email)}}", scholar && "\\href{#{latex_url_escape(scholar)}}{Google Scholar}", location && latex_escape(location), bio && latex_escape(bio)].compact.join(" \\quad ")}
     \\end{center}
 
     #{section_tex}
@@ -206,8 +220,12 @@ def compile_pdf
       [cmd, "-interaction=nonstopmode", "-halt-on-error", File.basename(TEX_PATH)]
     end
 
-  _stdout, stderr, status = Open3.capture3(*compile_cmd, chdir: OUT_DIR)
-  abort(stderr) unless status.success?
+  stdout, stderr, status = Open3.capture3(*compile_cmd, chdir: OUT_DIR)
+  unless status.success?
+    warn stdout unless stdout.empty?
+    warn stderr unless stderr.empty?
+    abort("LaTeX compilation failed.")
+  end
   puts "Generated #{PDF_PATH}" if File.exist?(PDF_PATH)
 end
 
