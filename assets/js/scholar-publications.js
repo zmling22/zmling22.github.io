@@ -6,6 +6,47 @@
     "in-context compositional generalization for large vision-language models": "images/pipeline/lch-emnlp-24.png",
     "compositional substitutivity of visual reasoning for visual question answering": "images/pipeline/lch-eccv-24.png"
   };
+  var PUBLICATION_AUTHORS = {
+    "world knowledge-enhanced reasoning using instruction-guided interactor in autonomous driving": [
+      "Mingliang Zhai",
+      "Cheng Li",
+      "Zengyuan Guo",
+      "Ningrui Yang",
+      "Xiameng Qin",
+      "Sanyuan Zhao",
+      "Junyu Han",
+      "Ji Tao",
+      "Yuwei Wu",
+      "Yunde Jia"
+    ],
+    "fast-structext: an efficient hourglass transformer with modality-guided dynamic token merge for document understanding": [
+      "Mingliang Zhai",
+      "Yulin Li",
+      "Xiameng Qin",
+      "Chen Yi",
+      "Qunyi Xie",
+      "Chengquan Zhang",
+      "Kun Yao",
+      "Yuwei Wu",
+      "Yunde Jia"
+    ],
+    "in-context compositional generalization for large vision-language models": [
+      "Chuanhao Li",
+      "Chenchen Jing",
+      "Zhen Li",
+      "Mingliang Zhai",
+      "Yuwei Wu",
+      "Yunde Jia"
+    ],
+    "compositional substitutivity of visual reasoning for visual question answering": [
+      "Chuanhao Li",
+      "Zhen Li",
+      "Chenchen Jing",
+      "Yuwei Wu",
+      "Mingliang Zhai",
+      "Yunde Jia"
+    ]
+  };
 
   function escapeHtml(value) {
     return String(value || "")
@@ -32,9 +73,12 @@
     return bib.venue || bib.journal || bib.conference || bib.citation || "";
   }
 
-  function publicationAuthors(publication) {
+  function publicationAuthors(publication, title) {
     var bib = publication.bib || {};
     var authors = bib.author || bib.authors || "";
+    if (!authors) {
+      return PUBLICATION_AUTHORS[normalizedTitle(title)] || [];
+    }
     if (Array.isArray(authors)) {
       return authors;
     }
@@ -75,7 +119,7 @@
     var title = bib.title || publication.title || "Untitled publication";
     var year = publicationYear(publication);
     var venue = publicationVenue(publication);
-    var authors = publicationAuthors(publication);
+    var authors = publicationAuthors(publication, title);
     var citations = publication.num_citations || 0;
     var link = publicationLink(publication);
     var titleHtml = validUrl(link)

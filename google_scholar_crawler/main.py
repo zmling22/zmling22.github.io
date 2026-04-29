@@ -8,6 +8,13 @@ author: dict = scholarly.search_author_id(os.environ['GOOGLE_SCHOLAR_ID'])
 scholarly.fill(author, sections=['basics', 'indices', 'counts', 'publications'])
 name = author['name']
 author['updated'] = str(datetime.now())
+
+for publication in author['publications']:
+    try:
+        scholarly.fill(publication)
+    except Exception as error:
+        print(f"Failed to fill publication {publication.get('author_pub_id')}: {error}")
+
 author['publications'] = {v['author_pub_id']:v for v in author['publications']}
 print(json.dumps(author, indent=2))
 os.makedirs('results', exist_ok=True)
