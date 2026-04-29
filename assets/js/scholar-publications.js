@@ -1,4 +1,12 @@
 (function () {
+  var HIGHLIGHT_AUTHOR = "Mingliang Zhai";
+  var PUBLICATION_IMAGES = {
+    "world knowledge-enhanced reasoning using instruction-guided interactor in autonomous driving": "images/pipeline/zml-aaai-25.png",
+    "fast-structext: an efficient hourglass transformer with modality-guided dynamic token merge for document understanding": "images/pipeline/zml-ijcai-23.png",
+    "in-context compositional generalization for large vision-language models": "images/pipeline/lch-emnlp-24.png",
+    "compositional substitutivity of visual reasoning for visual question answering": "images/pipeline/lch-eccv-24.png"
+  };
+
   function escapeHtml(value) {
     return String(value || "")
       .replace(/&/g, "&amp;")
@@ -27,11 +35,39 @@
   function publicationAuthors(publication) {
     var bib = publication.bib || {};
     var authors = bib.author || bib.authors || "";
-    return Array.isArray(authors) ? authors.join(", ") : authors;
+    if (Array.isArray(authors)) {
+      return authors;
+    }
+    return String(authors || "")
+      .split(/\s+and\s+|,\s*/i)
+      .map(function (author) {
+        return author.trim();
+      })
+      .filter(Boolean);
   }
 
   function publicationLink(publication) {
     return publication.eprint_url || publication.pub_url || publication.url || "";
+  }
+
+  function normalizedTitle(title) {
+    return String(title || "").trim().toLowerCase().replace(/\s+/g, " ");
+  }
+
+  function publicationImage(title) {
+    return PUBLICATION_IMAGES[normalizedTitle(title)] || "";
+  }
+
+  function renderAuthors(authors) {
+    return authors
+      .map(function (author) {
+        var escapedAuthor = escapeHtml(author);
+        if (author.toLowerCase() === HIGHLIGHT_AUTHOR.toLowerCase()) {
+          return '<strong class="scholar-author-highlight">' + escapedAuthor + "</strong>";
+        }
+        return escapedAuthor;
+      })
+      .join(", ");
   }
 
   function renderPublication(publication) {
@@ -46,12 +82,16 @@
       ? '<a href="' + escapeHtml(link) + '">' + escapeHtml(title) + "</a>"
       : escapeHtml(title);
     var meta = [year || "", venue].filter(Boolean).join(" · ");
+    var image = publicationImage(title);
 
     return [
-      '<div class="paper-box scholar-paper-box">',
+      '<div class="paper-box scholar-paper-box ' + (image ? "scholar-paper-with-image" : "scholar-paper-no-image") + '">',
+      image
+        ? '<div class="paper-box-image scholar-paper-image"><img src="' + escapeHtml(image) + '" alt="' + escapeHtml(title) + ' architecture"></div>'
+        : "",
       '<div class="paper-box-text" markdown="1">',
       "<p><strong>" + titleHtml + "</strong></p>",
-      authors ? "<p>" + escapeHtml(authors) + "</p>" : "",
+      authors.length ? '<p class="scholar-paper-authors">' + renderAuthors(authors) + "</p>" : "",
       meta ? "<p>" + escapeHtml(meta) + "</p>" : "",
       '<p class="scholar-paper-meta">Citations: ' + escapeHtml(citations) + "</p>",
       "</div>",
