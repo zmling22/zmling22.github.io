@@ -3,6 +3,9 @@ main:
   - title: "Biography"
     url: "/#-biography"
 
+  - title: "CV"
+    url: "/#-cv"
+
   - title: "Educations"
     url: "/#-educations"
 

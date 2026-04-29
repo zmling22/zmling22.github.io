@@ -25,6 +25,11 @@ My research area lies at:
 - Multimodal Large Language Models
 - Embodied Intelligence
 
+<span class='anchor' id='-cv'></span>
+# 📄 CV
+- [PDF CV](/resume/Mingliang_Zhai_CV.pdf)
+- [LaTeX Source](/resume/Mingliang_Zhai_CV.tex)
+
 <span class='anchor' id='-educations'></span>
 # 📖 Educations
 - *2023.09 - NOW*, <a href="https://www.bit.edu.cn/"><img class="png" src="/images/BIT_logo.png" width="23pt"></a> Ph.D. in Computer Science, Beijing Institute of Technology, Beijing, China. 
@@ -78,4 +83,3 @@ My research area lies at:
 # 💼 Internship
 - *2024.03 - 2024.08*, Chongqing Changan Automobile Co., Ltd. Chongqing, China.
 - *2022.06 - 2024.03*, Baidu Inc. Beijing, China.
-

@@ -1,0 +1,42 @@
+name: Export Resume
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "_config.yml"
+      - "_pages/about.md"
+      - "scripts/export_resume.rb"
+      - ".github/workflows/export_resume.yaml"
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-xetex texlive-lang-chinese texlive-latex-extra latexmk
+
+      - name: Generate LaTeX and PDF resume
+        run: ruby scripts/export_resume.rb
+
+      - name: Commit generated resume
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add resume/Mingliang_Zhai_CV.tex resume/Mingliang_Zhai_CV.pdf
+          git diff --cached --quiet || git commit -m "Update generated resume"
+          git push
+
+      - name: Upload resume artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume
+          path: |
+            resume/Mingliang_Zhai_CV.tex
+            resume/Mingliang_Zhai_CV.pdf

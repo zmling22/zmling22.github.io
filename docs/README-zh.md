@@ -60,6 +60,18 @@ AcadHomepage
 1. 在浏览器里打开 [http://127.0.0.1:4000](http://127.0.0.1:4000)。如果你修改了网页的源码，服务器会自动重新编译并刷新页面。
 1. 当你修改完毕你的页面以后, 使用`git`命令，`commit`你的改动并`push`到你的github仓库中。
 
+## 导出简历
+
+运行下面的命令，可以根据 `_config.yml` 和 `_pages/about.md` 自动导出 LaTeX 简历源码：
+
+```bash
+ruby scripts/export_resume.rb
+```
+
+导出文件位于 `resume/Mingliang_Zhai_CV.tex`。如果本地安装了 `xelatex` 或 `latexmk`，脚本会同时编译生成 `resume/Mingliang_Zhai_CV.pdf`。
+
+仓库也内置了 **Export Resume** GitHub Actions 工作流，可以手动触发；当主页内容变化时也会自动运行，并把 `.tex` 和 `.pdf` 作为 artifact 上传。
+
 # Acknowledges
 
 - AcadHomepage incorporates Font Awesome, which is distributed under the terms of the SIL OFL 1.1 and MIT License.
