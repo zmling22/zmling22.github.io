@@ -98,8 +98,9 @@
     return String(title || "").trim().toLowerCase().replace(/\s+/g, " ");
   }
 
-  function publicationImage(title) {
-    return PUBLICATION_IMAGES[normalizedTitle(title)] || "";
+  function publicationImage(title, generatedImages) {
+    var key = normalizedTitle(title);
+    return PUBLICATION_IMAGES[key] || generatedImages[key] || "";
   }
 
   function renderAuthors(authors) {
@@ -114,7 +115,7 @@
       .join(", ");
   }
 
-  function renderPublication(publication) {
+  function renderPublication(publication, generatedImages) {
     var bib = publication.bib || {};
     var title = bib.title || publication.title || "Untitled publication";
     var year = publicationYear(publication);
@@ -126,7 +127,7 @@
       ? '<a href="' + escapeHtml(link) + '">' + escapeHtml(title) + "</a>"
       : escapeHtml(title);
     var meta = [year || "", venue].filter(Boolean).join(" · ");
-    var image = publicationImage(title);
+    var image = publicationImage(title, generatedImages);
 
     return [
       '<div class="paper-box scholar-paper-box ' + (image ? "scholar-paper-with-image" : "scholar-paper-no-image") + '">',
@@ -143,7 +144,7 @@
     ].join("");
   }
 
-  function renderPublications(data, container) {
+  function renderPublications(data, container, generatedImages) {
     var publications = Object.keys(data.publications || {})
       .map(function (key) {
         return data.publications[key];
@@ -162,8 +163,44 @@
       return;
     }
 
-    container.innerHTML = publications.map(renderPublication).join("");
+    container.innerHTML = publications.map(function (publication) {
+      return renderPublication(publication, generatedImages);
+    }).join("");
     container.setAttribute("data-scholar-loaded", "true");
+  }
+
+  function imageMapUrl(source, imagePath) {
+    if (!imagePath) {
+      return "";
+    }
+    if (validUrl(imagePath) || imagePath.charAt(0) === "/") {
+      return imagePath;
+    }
+    return new URL(imagePath, source).toString();
+  }
+
+  function normalizeImageMap(source, imageMap) {
+    return Object.keys(imageMap || {}).reduce(function (result, title) {
+      result[normalizedTitle(title)] = imageMapUrl(source, imageMap[title]);
+      return result;
+    }, {});
+  }
+
+  function fetchJson(source, fallback) {
+    if (!source) {
+      return Promise.resolve(fallback);
+    }
+
+    return fetch(source, { cache: "no-cache" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Could not fetch " + source);
+        }
+        return response.json();
+      })
+      .catch(function () {
+        return fallback;
+      });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -173,19 +210,20 @@
     }
 
     var source = container.getAttribute("data-scholar-source");
+    var imagesSource = container.getAttribute("data-scholar-images-source");
     if (!source) {
       return;
     }
 
-    fetch(source, { cache: "no-cache" })
-      .then(function (response) {
-        if (!response.ok) {
+    Promise.all([
+      fetchJson(source, null),
+      fetchJson(imagesSource, {})
+    ])
+      .then(function (results) {
+        if (!results[0]) {
           throw new Error("Could not fetch Google Scholar publications.");
         }
-        return response.json();
-      })
-      .then(function (data) {
-        renderPublications(data, container);
+        renderPublications(results[0], container, normalizeImageMap(imagesSource, results[1]));
       })
       .catch(function () {
         container.setAttribute("data-scholar-loaded", "false");

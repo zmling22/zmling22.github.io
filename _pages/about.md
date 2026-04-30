@@ -15,6 +15,7 @@ redirect_from:
 {% endif %}
 {% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
 {% assign publications_url = gsDataBaseUrl | append: "google-scholar-stats/gs_data.json" %}
+{% assign publication_images_url = gsDataBaseUrl | append: "google-scholar-stats/publication_images.json" %}
 
 <span class='anchor' id='-biography'></span>
 # 📜 Biography
@@ -40,7 +41,7 @@ My research area lies at:
 <span class='anchor' id='-publications'></span>
 # 📝 Publications 
 
-<div id="scholar-publications" data-scholar-source="{{ publications_url }}">
+<div id="scholar-publications" data-scholar-source="{{ publications_url }}" data-scholar-images-source="{{ publication_images_url }}">
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">AAAI 2025</div><img src='images/pipeline/zml-aaai-25.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
