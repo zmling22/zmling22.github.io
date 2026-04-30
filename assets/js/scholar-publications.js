@@ -51,7 +51,9 @@
     "world knowledge-enhanced reasoning using instruction-guided interactor in autonomous driving": "AAAI 2025",
     "fast-structext: an efficient hourglass transformer with modality-guided dynamic token merge for document understanding": "IJCAI 2023",
     "in-context compositional generalization for large vision-language models": "EMNLP 2024",
-    "compositional substitutivity of visual reasoning for visual question answering": "ECCV 2024"
+    "compositional substitutivity of visual reasoning for visual question answering": "ECCV 2024",
+    "visual-guided reasoning path generation for visual question answering": "PRCV",
+    "synthesizing counterfactual samples for overcoming moment biases in temporal video grounding": "PRCV"
   };
 
   function escapeHtml(value) {
@@ -122,6 +124,20 @@
       .join(", ");
   }
 
+  function renderDetailItems(items) {
+    var renderedItems = items
+      .filter(function (item) {
+        return item && item.value;
+      })
+      .map(function (item) {
+        return '<li><span class="scholar-paper-detail-label">' + escapeHtml(item.label) + ':</span> ' + item.value + "</li>";
+      });
+
+    return renderedItems.length
+      ? '<ul class="scholar-paper-details">' + renderedItems.join("") + "</ul>"
+      : "";
+  }
+
   function renderPublication(publication, generatedImages) {
     var bib = publication.bib || {};
     var title = bib.title || publication.title || "Untitled publication";
@@ -135,6 +151,11 @@
       : escapeHtml(title);
     var meta = [year || "", venue].filter(Boolean).join(" · ");
     var image = publicationImage(title, generatedImages);
+    var details = [
+      authors.length ? { label: "Authors", value: renderAuthors(authors) } : null,
+      meta ? { label: "Venue", value: escapeHtml(meta) } : null,
+      { label: "Citations", value: escapeHtml(citations) }
+    ];
 
     return [
       '<div class="paper-box scholar-paper-box ' + (image ? "scholar-paper-with-image" : "scholar-paper-no-image") + '">',
@@ -143,9 +164,7 @@
         : "",
       '<div class="paper-box-text" markdown="1">',
       "<p><strong>" + titleHtml + "</strong></p>",
-      authors.length ? '<p class="scholar-paper-authors">' + renderAuthors(authors) + "</p>" : "",
-      meta ? "<p>" + escapeHtml(meta) + "</p>" : "",
-      '<p class="scholar-paper-meta">Citations: ' + escapeHtml(citations) + "</p>",
+      renderDetailItems(details),
       "</div>",
       "</div>"
     ].join("");

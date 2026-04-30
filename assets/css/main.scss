@@ -142,13 +142,20 @@ h1:before, .anchor:before {
     }
 }
 
-.scholar-paper-meta {
-    color: #666;
-    font-size: .9em;
+.scholar-paper-details {
+    margin-top: .45em;
+    padding-left: 1.25em;
+    color: #333;
+    font-size: .95em;
+
+    li {
+        margin-bottom: .25em;
+    }
 }
 
-.scholar-paper-authors {
-    margin-bottom: .35em;
+.scholar-paper-detail-label {
+    color: #666;
+    font-weight: 600;
 }
 
 .scholar-author-highlight {
