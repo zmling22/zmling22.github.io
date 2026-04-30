@@ -234,4 +234,4 @@ config = YAML.load_file(CONFIG_PATH)
 sections = extract_sections(File.read(ABOUT_PATH))
 File.write(TEX_PATH, build_tex(config, sections))
 puts "Generated #{TEX_PATH}"
-compile_pdf
+compile_pdf unless ENV["SKIP_PDF"] == "1"

@@ -22,21 +22,33 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y texlive-xetex texlive-lang-chinese texlive-latex-extra latexmk
 
-      - name: Generate LaTeX and PDF resume
-        run: ruby scripts/export_resume.rb
+      - name: Generate LaTeX resume
+        run: SKIP_PDF=1 ruby scripts/export_resume.rb
+
+      - name: Compile PDF resume
+        id: compile_pdf
+        continue-on-error: true
+        run: |
+          cd resume
+          latexmk -xelatex -interaction=nonstopmode -halt-on-error -file-line-error Mingliang_Zhai_CV.tex
 
       - name: Commit generated resume
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add resume/Mingliang_Zhai_CV.tex resume/Mingliang_Zhai_CV.pdf
+          git add resume/Mingliang_Zhai_CV.tex
+          if [ -f resume/Mingliang_Zhai_CV.pdf ]; then
+            git add resume/Mingliang_Zhai_CV.pdf
+          fi
           git diff --cached --quiet || git commit -m "Update generated resume"
           git push
 
       - name: Upload resume artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: resume
           path: |
             resume/Mingliang_Zhai_CV.tex
             resume/Mingliang_Zhai_CV.pdf
+            resume/Mingliang_Zhai_CV.log
