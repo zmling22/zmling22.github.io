@@ -47,6 +47,12 @@
       "Yunde Jia"
     ]
   };
+  var PUBLICATION_VENUES = {
+    "world knowledge-enhanced reasoning using instruction-guided interactor in autonomous driving": "AAAI 2025",
+    "fast-structext: an efficient hourglass transformer with modality-guided dynamic token merge for document understanding": "IJCAI 2023",
+    "in-context compositional generalization for large vision-language models": "EMNLP 2024",
+    "compositional substitutivity of visual reasoning for visual question answering": "ECCV 2024"
+  };
 
   function escapeHtml(value) {
     return String(value || "")
@@ -68,9 +74,10 @@
     return Number.isNaN(parsed) ? 0 : parsed;
   }
 
-  function publicationVenue(publication) {
+  function publicationVenue(publication, title) {
     var bib = publication.bib || {};
-    return bib.venue || bib.journal || bib.conference || bib.citation || "";
+    var venue = bib.venue || bib.journal || bib.conference || bib.citation || "";
+    return venue || PUBLICATION_VENUES[normalizedTitle(title)] || "Preprint";
   }
 
   function publicationAuthors(publication, title) {
@@ -119,7 +126,7 @@
     var bib = publication.bib || {};
     var title = bib.title || publication.title || "Untitled publication";
     var year = publicationYear(publication);
-    var venue = publicationVenue(publication);
+    var venue = publicationVenue(publication, title);
     var authors = publicationAuthors(publication, title);
     var citations = publication.num_citations || 0;
     var link = publicationLink(publication);
@@ -132,7 +139,7 @@
     return [
       '<div class="paper-box scholar-paper-box ' + (image ? "scholar-paper-with-image" : "scholar-paper-no-image") + '">',
       image
-        ? '<div class="paper-box-image scholar-paper-image"><img src="' + escapeHtml(image) + '" alt="' + escapeHtml(title) + ' architecture"></div>'
+        ? '<div class="paper-box-image scholar-paper-image"><div><div class="badge scholar-paper-badge">' + escapeHtml(venue) + '</div><img src="' + escapeHtml(image) + '" alt="' + escapeHtml(title) + ' architecture"></div></div>'
         : "",
       '<div class="paper-box-text" markdown="1">',
       "<p><strong>" + titleHtml + "</strong></p>",

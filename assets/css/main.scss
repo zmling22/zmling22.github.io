@@ -121,6 +121,15 @@ h1:before, .anchor:before {
         object-fit: contain;
     }
 
+    .scholar-paper-image > div {
+        position: relative;
+    }
+
+    .scholar-paper-badge {
+        max-width: calc(100% - 1rem);
+        line-height: 1.35;
+    }
+
     @include breakpoint($medium) {
         &.scholar-paper-with-image .paper-box-text {
             max-width: 60%;
