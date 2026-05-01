@@ -13,8 +13,15 @@ import xml.etree.ElementTree as ET
 
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
 MAX_PDF_BYTES = 30 * 1024 * 1024
+REQUEST_TIMEOUT = 8
 IMAGE_DIR = Path("results/publication-images")
 MIN_TEASER_AREA = 80_000
+MANUAL_IMAGE_TITLES = {
+    "world knowledge-enhanced reasoning using instruction-guided interactor in autonomous driving",
+    "fast-structext: an efficient hourglass transformer with modality-guided dynamic token merge for document understanding",
+    "in-context compositional generalization for large vision-language models",
+    "compositional substitutivity of visual reasoning for visual question answering",
+}
 
 
 def normalized_title(title):
@@ -33,7 +40,7 @@ def request_url(url):
             "User-Agent": "Mozilla/5.0 (compatible; zmling22.github.io publication image crawler)"
         },
     )
-    return urlopen(request, timeout=15)
+    return urlopen(request, timeout=REQUEST_TIMEOUT)
 
 
 def publication_urls(publication):
@@ -201,6 +208,8 @@ def build_publication_image_map(publications):
     for publication in publications:
         title = publication.get("bib", {}).get("title")
         if not title:
+            continue
+        if normalized_title(title) in MANUAL_IMAGE_TITLES:
             continue
         image_path = extract_teaser_image(publication, title)
         if image_path:
