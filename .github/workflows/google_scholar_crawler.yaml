@@ -2,6 +2,7 @@ name: Get Citation Data
 
 on: 
  page_build: 
+ workflow_dispatch:
  schedule:
   - cron:  '0 8 * * *'
 
@@ -28,3 +29,8 @@ jobs:
         git push "${remote_repo}" HEAD:google-scholar-stats --force
       env: 
         GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}
+        MAX_AUTO_IMAGE_PUBLICATIONS: 6
+        MAX_IMAGE_SECONDS: 420
+        MAX_PDF_BYTES: 12582912
+        MAX_PDF_PAGES: 2
+        REQUEST_TIMEOUT: 5
