@@ -5,64 +5,16 @@ from datetime import datetime
 import os
 import re
 import mimetypes
-from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import quote, urljoin
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
 
 
 MAX_IMAGE_BYTES = 5 * 1024 * 1024
+MAX_PDF_BYTES = 30 * 1024 * 1024
 IMAGE_DIR = Path("results/publication-images")
-FIGURE_KEYWORDS = (
-    "architecture",
-    "framework",
-    "pipeline",
-    "overview",
-    "method",
-    "model",
-    "network",
-    "approach",
-    "system",
-)
-
-
-class ArxivFigureParser(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.figure_depth = 0
-        self.caption_depth = 0
-        self.current = None
-        self.figures = []
-
-    def handle_starttag(self, tag, attrs):
-        tag = tag.lower()
-        attr_map = {key.lower(): value for key, value in attrs if key and value}
-        if tag == "figure":
-            if self.figure_depth == 0:
-                self.current = {"images": [], "caption": ""}
-            self.figure_depth += 1
-        elif tag == "img" and self.figure_depth and self.current is not None:
-            src = attr_map.get("src")
-            if src:
-                self.current["images"].append(src)
-        elif tag in {"figcaption", "caption"} and self.figure_depth:
-            self.caption_depth += 1
-
-    def handle_endtag(self, tag):
-        tag = tag.lower()
-        if tag in {"figcaption", "caption"} and self.caption_depth:
-            self.caption_depth -= 1
-        elif tag == "figure" and self.figure_depth:
-            self.figure_depth -= 1
-            if self.figure_depth == 0 and self.current:
-                if self.current["images"]:
-                    self.figures.append(self.current)
-                self.current = None
-
-    def handle_data(self, data):
-        if self.caption_depth and self.current is not None:
-            self.current["caption"] += data + " "
+MIN_TEASER_AREA = 80_000
 
 
 def normalized_title(title):
@@ -98,6 +50,15 @@ def arxiv_id_from_url(url):
     return match.group(1) if match else None
 
 
+def pdf_url_from_url(url):
+    if re.search(r"\.pdf(?:$|[?#])", url, re.IGNORECASE):
+        return url
+    arxiv_id = arxiv_id_from_url(url)
+    if arxiv_id:
+        return f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+    return None
+
+
 def arxiv_id_from_publication(publication, title):
     for url in publication_urls(publication):
         arxiv_id = arxiv_id_from_url(url)
@@ -125,46 +86,93 @@ def arxiv_id_from_publication(publication, title):
         return None
 
 
-def read_html(url):
-    try:
-        with request_url(url) as response:
-            content_type = response.headers.get("content-type", "")
-            if "text/html" not in content_type:
-                return None
-            return response.read(2 * 1024 * 1024).decode("utf-8", errors="ignore")
-    except Exception as error:
-        print(f"Failed to read arXiv HTML {url}: {error}")
-        return None
+def pdf_url_from_publication(publication, title):
+    for url in publication_urls(publication):
+        pdf_url = pdf_url_from_url(url)
+        if pdf_url:
+            return pdf_url
 
-def figure_score(figure):
-    caption = re.sub(r"\s+", " ", figure.get("caption", "")).lower()
-    return sum(1 for keyword in FIGURE_KEYWORDS if keyword in caption)
-
-
-def find_arxiv_figure_image(arxiv_id):
-    html_sources = [
-        f"https://ar5iv.labs.arxiv.org/html/{arxiv_id}",
-        f"https://arxiv.org/html/{arxiv_id}",
-    ]
-    for html_url in html_sources:
-        html = read_html(html_url)
-        if not html:
-            continue
-        parser = ArxivFigureParser()
-        parser.feed(html)
-        ranked_figures = sorted(
-            (figure for figure in parser.figures if figure_score(figure) > 0),
-            key=figure_score,
-            reverse=True,
-        )
-        for figure in ranked_figures:
-            image_url = urljoin(html_url, figure["images"][0])
-            if image_url.startswith(("http://", "https://")):
-                return image_url
+    arxiv_id = arxiv_id_from_publication(publication, title)
+    if arxiv_id:
+        return f"https://arxiv.org/pdf/{arxiv_id}.pdf"
     return None
 
 
+def read_pdf(url):
+    try:
+        with request_url(url) as response:
+            content_type = response.headers.get("content-type", "").split(";")[0].strip().lower()
+            if content_type and content_type not in {"application/pdf", "application/x-pdf", "binary/octet-stream"}:
+                return None
+            data = response.read(MAX_PDF_BYTES + 1)
+            if len(data) > MAX_PDF_BYTES:
+                print(f"Skipping large PDF {url}")
+                return None
+            return data
+    except Exception as error:
+        print(f"Failed to download PDF {url}: {error}")
+        return None
+
+
+def extract_teaser_from_pdf(pdf_bytes, title):
+    try:
+        import fitz
+    except ImportError as error:
+        print(f"PyMuPDF is unavailable: {error}")
+        return None
+
+    try:
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    except Exception as error:
+        print(f"Failed to open PDF for {title}: {error}")
+        return None
+
+    best = None
+    try:
+        for page_index in range(min(3, doc.page_count)):
+            page = doc[page_index]
+            for block in page.get_text("dict").get("blocks", []):
+                if block.get("type") != 1 or not block.get("image"):
+                    continue
+                bbox = block.get("bbox", [0, 0, 0, 0])
+                width = max(0, bbox[2] - bbox[0])
+                height = max(0, bbox[3] - bbox[1])
+                area = width * height
+                if area < MIN_TEASER_AREA:
+                    continue
+                if best is None or area > best["area"]:
+                    best = {
+                        "area": area,
+                        "image": block["image"],
+                        "extension": block.get("ext", "png"),
+                    }
+    finally:
+        doc.close()
+
+    if not best:
+        return None
+
+    extension = best["extension"]
+    if extension == "jpeg":
+        extension = "jpg"
+    path = IMAGE_DIR / f"{slugify(title)}.{extension}"
+    IMAGE_DIR.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(best["image"])
+    return str(path.relative_to("results"))
+
+
+def extract_teaser_image(publication, title):
+    pdf_url = pdf_url_from_publication(publication, title)
+    if not pdf_url:
+        return None
+    pdf_bytes = read_pdf(pdf_url)
+    if not pdf_bytes:
+        return None
+    return extract_teaser_from_pdf(pdf_bytes, title)
+
+
 def download_image(image_url, title):
+    # Kept for compatibility if future sources provide a verified figure URL.
     try:
         with request_url(image_url) as response:
             content_type = response.headers.get("content-type", "").split(";")[0].strip().lower()
@@ -185,6 +193,7 @@ def download_image(image_url, title):
     except Exception as error:
         print(f"Failed to download image {image_url}: {error}")
         return None
+    return None
 
 
 def build_publication_image_map(publications):
@@ -193,13 +202,7 @@ def build_publication_image_map(publications):
         title = publication.get("bib", {}).get("title")
         if not title:
             continue
-        arxiv_id = arxiv_id_from_publication(publication, title)
-        if not arxiv_id:
-            continue
-        image_url = find_arxiv_figure_image(arxiv_id)
-        if not image_url:
-            continue
-        image_path = download_image(image_url, title)
+        image_path = extract_teaser_image(publication, title)
         if image_path:
             image_map[normalized_title(title)] = image_path
     return image_map
