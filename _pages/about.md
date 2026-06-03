@@ -28,11 +28,6 @@ My research area lies at:
 - Embodied Intelligence
 - World Model
 
-<span class='anchor' id='-cv'></span>
-# 📄 CV
-- [PDF CV](/resume/Mingliang_Zhai_CV.pdf)
-- [LaTeX Source](/resume/Mingliang_Zhai_CV.tex)
-
 <span class='anchor' id='-educations'></span>
 # 📖 Educations
 - *2023.09 - NOW*, <a href="https://www.bit.edu.cn/"><img class="png" src="/images/BIT_logo.png" width="23pt"></a> Ph.D. in Computer Science, Beijing Institute of Technology, Beijing, China. 
