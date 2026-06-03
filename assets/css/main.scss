@@ -107,3 +107,57 @@ h1:before, .anchor:before {
     background-color: #00369f;
     font-size: .8em;
 }
+
+.scholar-paper-box {
+    align-items: flex-start;
+
+    .paper-box-text {
+        max-width: 100%;
+    }
+
+    .scholar-paper-image img {
+        width: 100%;
+        max-height: 180px;
+        object-fit: contain;
+    }
+
+    .scholar-paper-image > div {
+        position: relative;
+    }
+
+    .scholar-paper-badge {
+        max-width: calc(100% - 1rem);
+        line-height: 1.35;
+    }
+
+    @include breakpoint($medium) {
+        &.scholar-paper-with-image .paper-box-text {
+            max-width: 60%;
+        }
+
+        &.scholar-paper-no-image .paper-box-text {
+            max-width: 100%;
+            padding-left: 0;
+        }
+    }
+}
+
+.scholar-paper-details {
+    margin-top: .45em;
+    padding-left: 1.25em;
+    color: #333;
+    font-size: .95em;
+
+    li {
+        margin-bottom: .25em;
+    }
+}
+
+.scholar-paper-detail-label {
+    color: #666;
+    font-weight: 600;
+}
+
+.scholar-author-highlight {
+    font-weight: 700;
+}

@@ -14,6 +14,8 @@ redirect_from:
 {% assign gsDataBaseUrl = "https://raw.githubusercontent.com/" | append: site.repository | append: "/" %}
 {% endif %}
 {% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
+{% assign publications_url = gsDataBaseUrl | append: "google-scholar-stats/gs_data.json" %}
+{% assign publication_images_url = gsDataBaseUrl | append: "google-scholar-stats/publication_images.json" %}
 
 <span class='anchor' id='-biography'></span>
 # 📜 Biography
@@ -24,6 +26,11 @@ My research area lies at:
 - Vision-and-Language
 - Multimodal Large Language Models
 - Embodied Intelligence
+
+<span class='anchor' id='-cv'></span>
+# 📄 CV
+- [PDF CV](/resume/Mingliang_Zhai_CV.pdf)
+- [LaTeX Source](/resume/Mingliang_Zhai_CV.tex)
 
 <span class='anchor' id='-educations'></span>
 # 📖 Educations
@@ -94,4 +101,3 @@ My research area lies at:
 # 💼 Internship
 - *2024.03 - 2024.08*, Chongqing Changan Automobile Co., Ltd. Chongqing, China.
 - *2022.06 - 2024.03*, Baidu Inc. Beijing, China.
-

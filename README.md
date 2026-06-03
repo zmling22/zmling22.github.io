@@ -65,6 +65,18 @@ Some examples:
 1. If you change the source code of the website, the livereload server will automatically refresh.
 1. When you finish the modification of your homepage, `commit` your changings and `push` to your remote REPO using `git` command.
 
+## Export Resume
+
+Run the following command to export a LaTeX resume from `_config.yml` and `_pages/about.md`:
+
+```bash
+ruby scripts/export_resume.rb
+```
+
+The generated files are written to `resume/Mingliang_Zhai_CV.tex` and, when `xelatex` or `latexmk` is installed, `resume/Mingliang_Zhai_CV.pdf`.
+
+GitHub Actions also provides a manual **Export Resume** workflow and automatically uploads the `.tex` and `.pdf` files as workflow artifacts when the homepage content changes.
+
 # Acknowledges
 
 - AcadHomepage incorporates Font Awesome, which is distributed under the terms of the SIL OFL 1.1 and MIT License.
