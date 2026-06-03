@@ -26,6 +26,7 @@ My research area lies at:
 - Vision-and-Language
 - Multimodal Large Language Models
 - Embodied Intelligence
+- World Model
 
 <span class='anchor' id='-cv'></span>
 # 📄 CV
