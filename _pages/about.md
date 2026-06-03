@@ -34,6 +34,22 @@ My research area lies at:
 <span class='anchor' id='-publications'></span>
 # 📝 Publications 
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ArXiv</div><img src='images/pipeline/zml-arxiv-2510.20310.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+**Multi-step Reasoning for Embodied Question Answering via Tool Augmentation**
+- **Mingliang Zhai**, Hansheng Liang, Xiaomeng Fan, Zhi Gao, Chuanhao Li, Che Sun, Xu Bin, Yuwei Wu, Yunde Jia.
+- [ArXiv] [[paper]](https://arxiv.org/pdf/2510.20310)[[project]](https://tooleqa.github.io/)[[code]](https://github.com/ToolEQA/ToolEQA)
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ArXiv</div><img src='images/pipeline/zml-arxiv-2505.13948.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+**Memory-centric Embodied Question Answering**
+- **Mingliang Zhai**, Zhi Gao, Che Sun, Yuwei Wu, Yunde Jia.
+- [ArXiv] [[paper]](https://arxiv.org/pdf/2505.13948)[[code]](https://github.com/memory-eqa/MemoryEQA)
+</div>
+</div>
+
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">AAAI 2025</div><img src='images/pipeline/zml-aaai-25.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 **World Knowledge-Enhanced Reasoning Using Instruction-guided Interactor in Autonomous Driving**
