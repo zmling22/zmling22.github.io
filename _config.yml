@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "翟明亮 - Mingliang Zhai"
-description              : "Ph.D Canditate."
+description              : "Ph.D. candidate."
 url                      : "https://zmling22.github.io"
 baseurl                  : ""
 repository               : "zmling22/zmling22.github.io"
@@ -26,7 +26,7 @@ author:
   name             : "翟明亮"
   name_zh          : "(Mingliang Zhai)"
   avatar           : "images/头像.jpg"
-  bio              : "Beijing Inistitute Technology"
+  bio              : "Beijing Institute of Technology"
   location         : "Beijing, China"
   employer         :
   pubmed           : 

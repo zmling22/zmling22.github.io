@@ -10,17 +10,17 @@ redirect_from:
 
 <span class='anchor' id='-biography'></span>
 # 📜 Biography
-I am a Ph.D. candidate of Beijing Institute of Technology (BIT), advised by Prof. [Yuwei Wu](https://wu-yuwei-bit.github.io/) and Prof. [Yunde Jia](https://scholar.google.com/citations?user=Sl6TV7gAAAAJ&hl=zh-CN).
-I received my Master's degree in 2023 from Beijing Institute of Technology supervised by Prof. [Yuwei Wu](https://wu-yuwei-bit.github.io/) and Prof. [Yunde Jia](https://scholar.google.com/citations?user=Sl6TV7gAAAAJ&hl=zh-CN), and Bachlor degree in 2018 from Sichuan Normal University.
+I am a Ph.D. candidate at Beijing Institute of Technology (BIT), advised by Prof. [Yuwei Wu](https://wu-yuwei-bit.github.io/) and Prof. [Yunde Jia](https://scholar.google.com/citations?user=Sl6TV7gAAAAJ&hl=zh-CN).
+I received my master's degree from Beijing Institute of Technology in 2023 under the supervision of Prof. [Yuwei Wu](https://wu-yuwei-bit.github.io/) and Prof. [Yunde Jia](https://scholar.google.com/citations?user=Sl6TV7gAAAAJ&hl=zh-CN), and my bachelor's degree from Sichuan Normal University in 2018.
 
-My research area lies at: 
+My research interests include:
 - Vision-and-Language
 - Multimodal Large Language Models
 - Embodied Intelligence
 - World Model
 
 <span class='anchor' id='-educations'></span>
-# 📖 Educations
+# 📖 Education
 - *2023.09 - NOW*, <a href="https://www.bit.edu.cn/"><img class="png" src="/images/BIT_logo.png" width="23pt"></a> Ph.D. in Computer Science, Beijing Institute of Technology, Beijing, China. 
 - *2021.09 - 2023.07*, <a href="https://www.bit.edu.cn/"><img class="png" src="/images/BIT_logo.png" width="23pt"></a> M.S. in Software Engineering, Beijing Institute of Technology, Beijing, China.
 - *2014.09 - 2018.07*, <a href="https://www.sicnu.edu.cn/"><img class="png" src="/images/SNU_logo.png" width="23pt"></a> B.S. in Computer Science, Sichuan Normal University, Chengdu, Sichuan, China.
