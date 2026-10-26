@@ -1,4 +1,11 @@
 _site/
+.venv/
+.local/
+.bundle/
+vendor/bundle/
+__pycache__/
+*.pyc
+.jekyll-metadata
 push.sh
 .DS_Store
 resume/*.aux

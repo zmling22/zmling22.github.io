@@ -1,0 +1,74 @@
+{
+  "25-QBtwAAAAJ:_FxGoFyzp5QC": {
+    "page": 1,
+    "bbox": [
+      68.87,
+      457.47,
+      543.13,
+      684.33
+    ],
+    "caption": "Figure 1 Interactive world simulation across diverse scenes.",
+    "method": "figure-1-caption",
+    "extractor_version": 1,
+    "image": "images/publications/eed5b3bd2ffd3db5a1a7-figure-1.png",
+    "pdf_url": "https://arxiv.org/pdf/2607.18367",
+    "sources": [
+      "https://arxiv.org/abs/2607.18367"
+    ],
+    "pdf_sha256": "ecfe162ed101f47d18e3be467ea93cb8b49077e62d390539fd5e6ecfea90ec64"
+  },
+  "25-QBtwAAAAJ:YsMSGLbcyi4C": {
+    "page": 1,
+    "bbox": [
+      56.5,
+      220.67,
+      556.89,
+      349.6
+    ],
+    "caption": "Figure 1. Overview of ProSoftArena. We establish the ﬁrst hierarchical taxonomy of agent capabilities in professional software environ- ments; and curate a comprehensive benchmark covering 6 disciplines, 20 subﬁelds and 13 core professional applications. We construct a VM-based real computer environment for reproducible evaluations, and uniquely incorporate a human-in-the-loop evaluation paradigm.",
+    "method": "figure-1-caption",
+    "extractor_version": 1,
+    "image": "images/publications/1a4f2ef261ec9921a6b4-figure-1.png",
+    "pdf_url": "https://openaccess.thecvf.com/content/CVPR2026/papers/Ai_ProSoftArena_Benchmarking_Hierarchical_Capabilities_of_Multi-modal_Agents_in_Professional_Software_CVPR_2026_paper.pdf",
+    "sources": [
+      "https://openaccess.thecvf.com/content/CVPR2026/html/Ai_ProSoftArena_Benchmarking_Hierarchical_Capabilities_of_Multi-modal_Agents_in_Professional_Software_CVPR_2026_paper.html"
+    ],
+    "pdf_sha256": "797c70dbb7ceabd7b6866d0c85ee59340191a64282f5975c1e8585920b0f24a2"
+  },
+  "25-QBtwAAAAJ:LkGwnXOMwfcC": {
+    "page": 1,
+    "bbox": [
+      70.9,
+      491.22,
+      541.4,
+      656.05
+    ],
+    "caption": "Figure 1 From panoramic states to perspective video. AlayaVista evolves camera-conditioned panoramic states, rendering queried viewports (dashed boxes). Local refinement enhances visual details (bottom-right).",
+    "method": "figure-1-caption",
+    "extractor_version": 1,
+    "image": "images/publications/baa3fde3b96092e7a3c1-figure-1.png",
+    "pdf_url": "https://arxiv.org/pdf/2609.14462",
+    "sources": [
+      "https://arxiv.org/abs/2609.14462"
+    ],
+    "pdf_sha256": "427b00fbee90f4a5b6a67df781a6689e79d2a0746491259ba36139d14206e4a4"
+  },
+  "25-QBtwAAAAJ:W7OEmFMy1HYC": {
+    "page": 2,
+    "bbox": [
+      109.96,
+      47.32,
+      502.06,
+      231.44
+    ],
+    "caption": "Figure 1: The proposed IA-T2I, a framework for T2I models to refer to images.",
+    "method": "figure-1-caption",
+    "extractor_version": 1,
+    "image": "images/publications/206f4ad083439270de3c-figure-1.png",
+    "pdf_url": "https://arxiv.org/pdf/2505.15779",
+    "sources": [
+      "https://arxiv.org/abs/2505.15779"
+    ],
+    "pdf_sha256": "891daa211d36db06cc9ed2e40ba38f3cdb129924bf23c7ebbad03aa90b27f534"
+  }
+}

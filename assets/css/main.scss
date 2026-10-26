@@ -88,6 +88,16 @@
 }
 
 $scroll_offset : 2em;
+.paper-box-no-image .paper-box-text {
+    max-width: 100%;
+    padding-left: 0;
+}
+
+.publication-sync-info {
+    color: #666;
+    font-size: .9em;
+}
+
 h1:before, .anchor:before { 
     content: ''; 
     display: block; 

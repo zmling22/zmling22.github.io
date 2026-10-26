@@ -1,0 +1,21 @@
+{% assign paper = include.paper %}
+<div class="paper-box{% unless paper.image and paper.image != '' %} paper-box-no-image{% endunless %}" data-publication-id="{{ paper.id | escape }}">
+  {% if paper.image and paper.image != '' %}
+  <div class="paper-box-image"><div>
+    {% unless paper.image contains 'images/publications/' %}
+      {% if paper.venue and paper.venue != '' %}<div class="badge">{{ paper.venue | escape }}</div>{% endif %}
+    {% endunless %}
+    <img src="{{ paper.image | relative_url }}" alt="{{ paper.title | escape }}" loading="lazy" width="100%">
+  </div></div>
+  {% endif %}
+  <div class="paper-box-text">
+    <p><strong>{{ paper.title | escape }}</strong></p>
+    <ul>
+      {% if paper.authors.size > 0 %}<li>{% for author in paper.authors %}{% if author == "Mingliang Zhai" %}<strong>{{ author | escape }}</strong>{% else %}{{ author | escape }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}.</li>{% endif %}
+      <li>{% if paper.venue and paper.venue != '' %}{{ paper.venue | escape }}{% elsif paper.year > 0 %}{{ paper.year }}{% endif %}
+        {% for link in paper.links %}{% if link[1] and link[1] != '' %} <a href="{{ link[1] | escape }}">[{{ link[0] | escape }}]</a>{% endif %}{% endfor %}
+        {% if paper.citations != nil %} · Citations: {{ paper.citations }}{% endif %}
+      </li>
+    </ul>
+  </div>
+</div>

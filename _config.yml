@@ -8,6 +8,8 @@
 # Site Settings
 title                    : "翟明亮 - Mingliang Zhai"
 description              : "Ph.D Canditate."
+url                      : "https://zmling22.github.io"
+baseurl                  : ""
 repository               : "zmling22/zmling22.github.io"
 google_scholar_stats_use_cdn : true
 
@@ -66,6 +68,12 @@ include:
   - _pages
   - files
 exclude:
+  - .venv
+  - .local
+  - scripts
+  - tests
+  - run_server.sh
+  - sync_publications.sh
   - docs
   - google_scholar_crawler
   - "*.sublime-project"

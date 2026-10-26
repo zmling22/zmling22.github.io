@@ -32,7 +32,49 @@ AcadHomepage
 - **美观而简约**: 此主页美观而简约，适合个人学术主页的搭建。
 - **搜索引擎优化**: 搜索引擎优化 (SEO) 帮助搜索引擎轻松找到您在主页上发布的信息，然后将其与类似网站进行排名，并获得排名优势。
 
-## 快速开始
+## 当前仓库：本地论文同步
+
+论文内容由 `_data/publications.json` 统一提供，Jekyll 在构建时生成完整 HTML。人工维护的标题、作者、会议名称、配图、项目和代码链接保存在 `_data/publication_overrides.json`，使用 Scholar 论文 ID 匹配。个人介绍、教育经历等仍在 `_pages/about.md` 中编辑。
+
+首次安装 Python 依赖：
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r google_scholar_crawler/requirements.txt
+```
+
+本地 Jekyll 环境安装完成后，一条命令抓取并构建，再启动预览：
+
+```bash
+bash sync_publications.sh
+bash run_server.sh
+```
+
+访问 `http://127.0.0.1:4000`。Scholar ID 自动从 `_config.yml` 的 `author.googlescholar` 链接读取。每次更新论文列表和引用数；未变化的论文复用详情缓存，新论文及变化条目会获取详情。需要全量刷新详情时使用 `bash sync_publications.sh --refresh-details`。
+
+抓取超时、空列表、数据格式错误或作者 ID 不匹配时，不覆盖已有首页数据。暂时从 Scholar 消失的论文也会保留，等待人工核对。执行状态写入 `.local/scholar-sync-status.json`。`--input path/to/gs_data.json` 可离线重放已有数据，只使用图片/PDF 缓存、不访问网络，保留原始抓取时间。
+
+正常同步会为缺图论文自动提取 PDF 的 Figure 1。支持解析 arXiv、CVF、OpenReview、Springer 的论文链接，以及出版商页面中明确提供的 PDF 元数据或链接。在 PDF 前 12 页定位 Figure 1 图注，合并图注上方的矢量图、位图、文字标注和子图，渲染为完整 PNG。无法可靠定位图形或无法下载 PDF 时记录原因，不用整页截图代替。版面识别采用启发式规则，新增图片应在本地预览中检查。
+
+`_data/publication_overrides.json` 中的人工 `image` 优先保留；显式设置 `"image": ""` 可关闭某篇论文的自动配图。生成的图片位于 `images/publications/`，PDF 来源、校验值、页码及裁剪坐标记录在 `_data/publication_images.json`。下载的 PDF 缓存在被 Git 忽略的 `.local/publication-pdfs/`。下次同步复用成功图片；失败时保留旧图，继续更新论文信息和构建网站。提图有独立的 240 秒超时（`--image-timeout`），单个 PDF 上限为 64 MiB。每篇论文的处理结果见 `.local/publication-image-status.json`。
+
+```bash
+bash sync_publications.sh --images-only     # 使用已有论文列表，仅补齐配图
+bash sync_publications.sh --skip-images     # 只更新论文信息，保留现有图片
+bash sync_publications.sh --images-only --refresh-images  # 重新下载并提取自动配图
+```
+
+本地 Ruby 环境准备方式见英文 README；`scripts/jekyll.sh` 自动优先使用项目内的 `.local/gems` 和 `vendor/bundle`。验证命令：`.venv/bin/python -m unittest discover -s tests -v`。
+
+简历导出也读取同一份论文数据。只验证 LaTeX 源码、保留现有下载文件时运行：
+
+```bash
+RESUME_OUTPUT_DIR=.local/resume-check SKIP_PDF=1 ruby scripts/export_resume.rb
+```
+
+编译 PDF 仍需安装 XeLaTeX/latexmk。当前只打通本地流程；原有 GitHub 工作流仍将原始数据写到 `google-scholar-stats` 分支，尚未接入新的快照构建和部署流程，也未重新启用定时运行。下方是原模板的配置说明。
+
+## 原模板配置（旧 Scholar 工作流）
 
 1. Fork本仓库到`USERNAME/USERNAME.github.io`，其中`USERNAME`是你的github用户名。
 1. 配置谷歌学术引用爬虫：
@@ -62,7 +104,7 @@ AcadHomepage
 
 ## 导出简历
 
-运行下面的命令，可以根据 `_config.yml` 和 `_pages/about.md` 自动导出 LaTeX 简历源码：
+运行下面的命令，可以根据 `_config.yml`、`_pages/about.md` 和 `_data/publications.json` 自动导出 LaTeX 简历源码：
 
 ```bash
 ruby scripts/export_resume.rb

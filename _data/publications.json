@@ -1,0 +1,317 @@
+{
+  "schema_version": 1,
+  "scholar_id": "25-QBtwAAAAJ",
+  "updated": "2026-10-23T09:24:47.767878+00:00",
+  "total_citations": 108,
+  "source_count": 13,
+  "publications": [
+    {
+      "id": "25-QBtwAAAAJ:_FxGoFyzp5QC",
+      "title": "AlayaWorld: Interactive Long-Horizon World Modeling--Full Technical Report",
+      "year": 2026,
+      "authors": [
+        "AlayaWorld Team",
+        "Kaipeng Zhang",
+        "Chuanhao Li",
+        "Yifan Zhan",
+        "Yongtao Ge",
+        "Yuanyang Yin",
+        "Jiaming Tan",
+        "Kang He",
+        "Liaoyuan Fan",
+        "Mingliang Zhai",
+        "Ruicong Liu",
+        "Xiaojie Xu",
+        "Xuangeng Chu",
+        "Zhen Li",
+        "Zhengyuan Lin",
+        "Zhixiang Wang",
+        "Zian Meng",
+        "Zihui Gao"
+      ],
+      "venue": "arXiv preprint arXiv:2607.18367",
+      "citations": 16,
+      "image": "images/publications/eed5b3bd2ffd3db5a1a7-figure-1.png",
+      "links": {
+        "paper": "https://arxiv.org/abs/2607.18367",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:_FxGoFyzp5QC"
+      },
+      "in_latest_snapshot": true
+    },
+    {
+      "id": "25-QBtwAAAAJ:YsMSGLbcyi4C",
+      "title": "Prosoftarena: Benchmarking hierarchical capabilities of multi-modal agents in professional software environments",
+      "year": 2026,
+      "authors": [
+        "Jiaxin Ai",
+        "Yukang Feng",
+        "Fanrui Zhang",
+        "Jianwen Sun",
+        "Zizhen Li",
+        "Chuanhao Li",
+        "Yifan Chang",
+        "Wenxiao Wu",
+        "Ruoxi Wang",
+        "Mingliang Zhai",
+        "Kaipeng Zhang"
+      ],
+      "venue": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+      "citations": 8,
+      "image": "images/publications/1a4f2ef261ec9921a6b4-figure-1.png",
+      "links": {
+        "paper": "https://openaccess.thecvf.com/content/CVPR2026/html/Ai_ProSoftArena_Benchmarking_Hierarchical_Capabilities_of_Multi-modal_Agents_in_Professional_Software_CVPR_2026_paper.html",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:YsMSGLbcyi4C"
+      },
+      "in_latest_snapshot": true
+    },
+    {
+      "id": "25-QBtwAAAAJ:LkGwnXOMwfcC",
+      "title": "AlayaVista: Streaming World Modeling from Panoramic States to Perspective Video",
+      "year": 2026,
+      "authors": [
+        "Jiaming Tan",
+        "Mingliang Zhai",
+        "Zhen Li",
+        "Yuwei Wu",
+        "Chuanhao Li",
+        "Kaipeng Zhang"
+      ],
+      "venue": "arXiv preprint arXiv:2609.14462",
+      "citations": 1,
+      "image": "images/publications/baa3fde3b96092e7a3c1-figure-1.png",
+      "links": {
+        "paper": "https://arxiv.org/abs/2609.14462",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:LkGwnXOMwfcC"
+      },
+      "in_latest_snapshot": true
+    },
+    {
+      "id": "25-QBtwAAAAJ:Y0pCki6q_DkC",
+      "title": "Multi-step Reasoning for Embodied Question Answering via Tool Augmentation",
+      "year": 2025,
+      "authors": [
+        "Mingliang Zhai",
+        "Hansheng Liang",
+        "Xiaomeng Fan",
+        "Zhi Gao",
+        "Chuanhao Li",
+        "Che Sun",
+        "Xu Bin",
+        "Yuwei Wu",
+        "Yunde Jia"
+      ],
+      "venue": "ArXiv",
+      "citations": 6,
+      "image": "images/pipeline/zml-arxiv-2510.20310.png",
+      "links": {
+        "paper": "https://arxiv.org/pdf/2510.20310",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:Y0pCki6q_DkC",
+        "project": "https://tooleqa.github.io/",
+        "code": "https://github.com/ToolEQA/ToolEQA"
+      },
+      "in_latest_snapshot": true,
+      "order": 0
+    },
+    {
+      "id": "25-QBtwAAAAJ:Tyk-4Ss8FVUC",
+      "title": "Memory-centric Embodied Question Answering",
+      "year": 2025,
+      "authors": [
+        "Mingliang Zhai",
+        "Zhi Gao",
+        "Che Sun",
+        "Yuwei Wu",
+        "Yunde Jia"
+      ],
+      "venue": "ArXiv",
+      "citations": 27,
+      "image": "images/pipeline/zml-arxiv-2505.13948.png",
+      "links": {
+        "paper": "https://arxiv.org/pdf/2505.13948",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:Tyk-4Ss8FVUC",
+        "code": "https://github.com/memory-eqa/MemoryEQA"
+      },
+      "in_latest_snapshot": true,
+      "order": 1
+    },
+    {
+      "id": "25-QBtwAAAAJ:zYLM7Y9cAGgC",
+      "title": "World Knowledge-Enhanced Reasoning Using Instruction-guided Interactor in Autonomous Driving",
+      "year": 2025,
+      "authors": [
+        "Mingliang Zhai",
+        "Cheng Li",
+        "Zengyuan Guo",
+        "Ningrui Yang",
+        "Xiameng Qin",
+        "Sanyuan Zhao",
+        "Junyu Han",
+        "Ji Tao",
+        "Yuwei Wu",
+        "Yunde Jia"
+      ],
+      "venue": "AAAI 2025",
+      "citations": 12,
+      "image": "images/pipeline/zml-aaai-25.png",
+      "links": {
+        "paper": "https://arxiv.org/pdf/2412.06324",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:zYLM7Y9cAGgC",
+        "code": "https://github.com/zmling22/KAD"
+      },
+      "in_latest_snapshot": true,
+      "order": 2
+    },
+    {
+      "id": "25-QBtwAAAAJ:W7OEmFMy1HYC",
+      "title": "Ia-t2i: Internet-augmented text-to-image generation",
+      "year": 2025,
+      "authors": [
+        "Chuanhao Li",
+        "Jianwen Sun",
+        "Yukang Feng",
+        "Mingliang Zhai",
+        "Yifan Chang",
+        "Kaipeng Zhang"
+      ],
+      "venue": "arXiv preprint arXiv:2505.15779",
+      "citations": 6,
+      "image": "images/publications/206f4ad083439270de3c-figure-1.png",
+      "links": {
+        "paper": "https://arxiv.org/abs/2505.15779",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:W7OEmFMy1HYC"
+      },
+      "in_latest_snapshot": true
+    },
+    {
+      "id": "25-QBtwAAAAJ:UeHWp8X0CEIC",
+      "title": "In-Context Compositional Generalization for Large Vision-Language Models",
+      "year": 2024,
+      "authors": [
+        "Chuanhao Li",
+        "Chenchen Jing",
+        "Zhen Li",
+        "Mingliang Zhai",
+        "Yuwei Wu",
+        "Yunde Jia"
+      ],
+      "venue": "EMNLP 2024",
+      "citations": 12,
+      "image": "images/pipeline/lch-emnlp-24.png",
+      "links": {
+        "paper": "https://aclanthology.org/2024.emnlp-main.996.pdf",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:UeHWp8X0CEIC"
+      },
+      "in_latest_snapshot": true,
+      "order": 4
+    },
+    {
+      "id": "25-QBtwAAAAJ:qjMakFHDy7sC",
+      "title": "Compositional Substitutivity of Visual Reasoning for Visual Question Answering",
+      "year": 2024,
+      "authors": [
+        "Chuanhao Li",
+        "Zhen Li",
+        "Chenchen Jing",
+        "Yuwei Wu",
+        "Mingliang Zhai",
+        "Yunde Jia"
+      ],
+      "venue": "ECCV 2024",
+      "citations": 5,
+      "image": "images/pipeline/lch-eccv-24.png",
+      "links": {
+        "paper": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06434.pdf",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:qjMakFHDy7sC",
+        "code": "https://github.com/NeverMoreLCH/CG-SPS"
+      },
+      "in_latest_snapshot": true,
+      "order": 5
+    },
+    {
+      "id": "25-QBtwAAAAJ:IjCSPb-OGe4C",
+      "title": "Visual-Guided Reasoning Path Generation for Visual Question Answering",
+      "year": 2024,
+      "authors": [
+        "Xinyu Liu",
+        "Chenchen Jing",
+        "Mingliang Zhai",
+        "Yuwei Wu",
+        "Yunde Jia"
+      ],
+      "venue": "Chinese Conference on Pattern Recognition and Computer Vision (PRCV), 167-180, 2024",
+      "citations": 0,
+      "image": "",
+      "links": {
+        "paper": "https://link.springer.com/chapter/10.1007/978-981-97-8487-5_12",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:IjCSPb-OGe4C"
+      },
+      "in_latest_snapshot": true
+    },
+    {
+      "id": "25-QBtwAAAAJ:9yKSN-GCB0IC",
+      "title": "Fast-StrucTexT: An efficient hourglass transformer with modality-guided dynamic token merge for document understanding",
+      "year": 2023,
+      "authors": [
+        "Mingliang Zhai",
+        "Yulin Li",
+        "Xiameng Qin",
+        "Chen Yi",
+        "Qunyi Xie",
+        "Chengquan Zhang",
+        "Kun Yao",
+        "Yuwei Wu",
+        "Yunde Jia"
+      ],
+      "venue": "IJCAI 2023",
+      "citations": 14,
+      "image": "images/pipeline/zml-ijcai-23.png",
+      "links": {
+        "paper": "https://www.ijcai.org/proceedings/2023/0585.pdf",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:9yKSN-GCB0IC"
+      },
+      "in_latest_snapshot": true,
+      "order": 3
+    },
+    {
+      "id": "25-QBtwAAAAJ:u5HHmVD_uO8C",
+      "title": "Synthesizing Counterfactual Samples for Overcoming Moment Biases in Temporal Video Grounding",
+      "year": 2022,
+      "authors": [
+        "Mingliang Zhai",
+        "Chuanhao Li",
+        "Chenchen Jing",
+        "Yuwei Wu"
+      ],
+      "venue": "Chinese Conference on Pattern Recognition and Computer Vision (PRCV), 436-448, 2022",
+      "citations": 1,
+      "image": "",
+      "links": {
+        "paper": "https://link.springer.com/chapter/10.1007/978-3-031-18907-4_34",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:u5HHmVD_uO8C"
+      },
+      "in_latest_snapshot": true
+    },
+    {
+      "id": "25-QBtwAAAAJ:eQOLeE2rZwMC",
+      "title": "Search-T2I: Internet-Augmented Text-to-Image Generation",
+      "year": 0,
+      "authors": [
+        "Chuanhao Li",
+        "Jianwen Sun",
+        "Yukang Feng",
+        "Mingliang Zhai",
+        "Yifan Chang",
+        "Zhen Li",
+        "Kaipeng Zhang"
+      ],
+      "venue": "",
+      "citations": 0,
+      "image": "",
+      "links": {
+        "paper": "https://openreview.net/forum?id=7fCwWFb3rt",
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:eQOLeE2rZwMC"
+      },
+      "in_latest_snapshot": true
+    }
+  ]
+}

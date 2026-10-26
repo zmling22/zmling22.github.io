@@ -8,15 +8,6 @@ redirect_from:
   - /about.html
 ---
 
-{% if site.google_scholar_stats_use_cdn %}
-{% assign gsDataBaseUrl = "https://cdn.jsdelivr.net/gh/" | append: site.repository | append: "@" %}
-{% else %}
-{% assign gsDataBaseUrl = "https://raw.githubusercontent.com/" | append: site.repository | append: "/" %}
-{% endif %}
-{% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
-{% assign publications_url = gsDataBaseUrl | append: "google-scholar-stats/gs_data.json" %}
-{% assign publication_images_url = gsDataBaseUrl | append: "google-scholar-stats/publication_images.json" %}
-
 <span class='anchor' id='-biography'></span>
 # 📜 Biography
 I am a Ph.D. candidate of Beijing Institute of Technology (BIT), advised by Prof. [Yuwei Wu](https://wu-yuwei-bit.github.io/) and Prof. [Yunde Jia](https://scholar.google.com/citations?user=Sl6TV7gAAAAJ&hl=zh-CN).
@@ -37,56 +28,7 @@ My research area lies at:
 <span class='anchor' id='-publications'></span>
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ArXiv</div><img src='images/pipeline/zml-arxiv-2510.20310.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-**Multi-step Reasoning for Embodied Question Answering via Tool Augmentation**
-- **Mingliang Zhai**, Hansheng Liang, Xiaomeng Fan, Zhi Gao, Chuanhao Li, Che Sun, Xu Bin, Yuwei Wu, Yunde Jia.
-- [ArXiv] [[paper]](https://arxiv.org/pdf/2510.20310)[[project]](https://tooleqa.github.io/)[[code]](https://github.com/ToolEQA/ToolEQA)
-</div>
-</div>
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ArXiv</div><img src='images/pipeline/zml-arxiv-2505.13948.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-**Memory-centric Embodied Question Answering**
-- **Mingliang Zhai**, Zhi Gao, Che Sun, Yuwei Wu, Yunde Jia.
-- [ArXiv] [[paper]](https://arxiv.org/pdf/2505.13948)[[code]](https://github.com/memory-eqa/MemoryEQA)
-</div>
-</div>
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">AAAI 2025</div><img src='images/pipeline/zml-aaai-25.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-**World Knowledge-Enhanced Reasoning Using Instruction-guided Interactor in Autonomous Driving**
-- **Mingliang Zhai**, Cheng Li, Zengyuan Guo, Ningrui Yang, Xiameng Qin, Sanyuan Zhao, Junyu Han, Ji Tao, Yuwei Wu, Yunde Jia.
-- [AAAI 2025] [[paper]](https://arxiv.org/pdf/2412.06324)[[code]](https://github.com/zmling22/KAD)
-</div>
-</div>
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">IJCAI 2023</div><img src='images/pipeline/zml-ijcai-23.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-**Fast-StrucTexT: An efficient hourglass transformer with modality-guided dynamic token merge for document understanding**
-- **Mingliang Zhai**, Yulin Li, Xiameng Qin, Chen Yi, Qunyi Xie, Chengquan Zhang, Kun Yao, Yuwei Wu, Yunde Jia.
-- [IJCAI 2023] [[paper]](https://www.ijcai.org/proceedings/2023/0585.pdf) 
-</div>
-</div>
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024</div><img src='images/pipeline/lch-emnlp-24.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-**In-Context Compositional Generalization for Large Vision-Language Models**
-- Chuanhao Li, Chenchen Jing, Zhen Li, **Mingliang Zhai**, Yuwei Wu, and Yunde Jia.
-- [EMNLP 2024] [[paper]](https://aclanthology.org/2024.emnlp-main.996.pdf)
-</div>
-</div>
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ECCV 2024</div><img src='images/pipeline/lch-eccv-24.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-**Compositional Substitutivity of Visual Reasoning for Visual Question Answering**
-- Chuanhao Li, Zhen Li, Chenchen Jing, Yuwei Wu, **Mingliang Zhai**, and Yunde Jia.
-- [ECCV 2024] [[paper]](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06434.pdf) [[code]](https://github.com/NeverMoreLCH/CG-SPS)
-</div>
-</div>
-
-
-
+{% include publications.html %}
 
 <span class='anchor' id='-awards'></span>
 # 🎖 Honors and Awards

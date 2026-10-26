@@ -1,0 +1,124 @@
+{
+  "25-QBtwAAAAJ:Y0pCki6q_DkC": {
+    "title": "Multi-step Reasoning for Embodied Question Answering via Tool Augmentation",
+    "authors": [
+      "Mingliang Zhai",
+      "Hansheng Liang",
+      "Xiaomeng Fan",
+      "Zhi Gao",
+      "Chuanhao Li",
+      "Che Sun",
+      "Xu Bin",
+      "Yuwei Wu",
+      "Yunde Jia"
+    ],
+    "venue": "ArXiv",
+    "year": 2025,
+    "image": "images/pipeline/zml-arxiv-2510.20310.png",
+    "links": {
+      "paper": "https://arxiv.org/pdf/2510.20310",
+      "project": "https://tooleqa.github.io/",
+      "code": "https://github.com/ToolEQA/ToolEQA"
+    },
+    "order": 0
+  },
+  "25-QBtwAAAAJ:Tyk-4Ss8FVUC": {
+    "title": "Memory-centric Embodied Question Answering",
+    "authors": [
+      "Mingliang Zhai",
+      "Zhi Gao",
+      "Che Sun",
+      "Yuwei Wu",
+      "Yunde Jia"
+    ],
+    "venue": "ArXiv",
+    "year": 2025,
+    "image": "images/pipeline/zml-arxiv-2505.13948.png",
+    "links": {
+      "paper": "https://arxiv.org/pdf/2505.13948",
+      "code": "https://github.com/memory-eqa/MemoryEQA"
+    },
+    "order": 1
+  },
+  "25-QBtwAAAAJ:zYLM7Y9cAGgC": {
+    "title": "World Knowledge-Enhanced Reasoning Using Instruction-guided Interactor in Autonomous Driving",
+    "authors": [
+      "Mingliang Zhai",
+      "Cheng Li",
+      "Zengyuan Guo",
+      "Ningrui Yang",
+      "Xiameng Qin",
+      "Sanyuan Zhao",
+      "Junyu Han",
+      "Ji Tao",
+      "Yuwei Wu",
+      "Yunde Jia"
+    ],
+    "venue": "AAAI 2025",
+    "year": 2025,
+    "image": "images/pipeline/zml-aaai-25.png",
+    "links": {
+      "paper": "https://arxiv.org/pdf/2412.06324",
+      "code": "https://github.com/zmling22/KAD"
+    },
+    "order": 2
+  },
+  "25-QBtwAAAAJ:9yKSN-GCB0IC": {
+    "title": "Fast-StrucTexT: An efficient hourglass transformer with modality-guided dynamic token merge for document understanding",
+    "authors": [
+      "Mingliang Zhai",
+      "Yulin Li",
+      "Xiameng Qin",
+      "Chen Yi",
+      "Qunyi Xie",
+      "Chengquan Zhang",
+      "Kun Yao",
+      "Yuwei Wu",
+      "Yunde Jia"
+    ],
+    "venue": "IJCAI 2023",
+    "year": 2023,
+    "image": "images/pipeline/zml-ijcai-23.png",
+    "links": {
+      "paper": "https://www.ijcai.org/proceedings/2023/0585.pdf"
+    },
+    "order": 3
+  },
+  "25-QBtwAAAAJ:UeHWp8X0CEIC": {
+    "title": "In-Context Compositional Generalization for Large Vision-Language Models",
+    "authors": [
+      "Chuanhao Li",
+      "Chenchen Jing",
+      "Zhen Li",
+      "Mingliang Zhai",
+      "Yuwei Wu",
+      "Yunde Jia"
+    ],
+    "venue": "EMNLP 2024",
+    "year": 2024,
+    "image": "images/pipeline/lch-emnlp-24.png",
+    "links": {
+      "paper": "https://aclanthology.org/2024.emnlp-main.996.pdf"
+    },
+    "order": 4
+  },
+  "25-QBtwAAAAJ:qjMakFHDy7sC": {
+    "title": "Compositional Substitutivity of Visual Reasoning for Visual Question Answering",
+    "authors": [
+      "Chuanhao Li",
+      "Zhen Li",
+      "Chenchen Jing",
+      "Yuwei Wu",
+      "Mingliang Zhai",
+      "Yunde Jia"
+    ],
+    "venue": "ECCV 2024",
+    "year": 2024,
+    "image": "images/pipeline/lch-eccv-24.png",
+    "links": {
+      "paper": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06434.pdf",
+      "code": "https://github.com/NeverMoreLCH/CG-SPS"
+    },
+    "order": 5
+  }
+}

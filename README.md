@@ -30,7 +30,54 @@ Some examples:
 - **Beautiful and Simple Design**: this homepage is beautiful and simple, which is very suitable for academic personal homepage.
 - **SEO**: search Engine Optimization (SEO) helps search engines find the information you publish on your homepage easily, then rank it against similar websites.
 
-## Quick Start
+## Local publication sync (this repository)
+
+The homepage now renders `_data/publications.json` at Jekyll build time. Curated titles, authors, venue labels, images and project/code links are stored in `_data/publication_overrides.json`, keyed by Google Scholar publication ID. Other sections remain in `_pages/about.md`.
+
+Set up Python once:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r google_scholar_crawler/requirements.txt
+```
+
+With the Jekyll dependencies installed, fetch and rebuild with:
+
+```bash
+bash sync_publications.sh
+bash run_server.sh
+```
+
+Open `http://127.0.0.1:4000`. The sync command reads the Scholar ID from `author.googlescholar` in `_config.yml`. It refreshes the publication list and citation counts, reuses cached article details when the profile entry is unchanged, and fetches new/changed articles. Use `bash sync_publications.sh --refresh-details` to refresh all details. No credentials are needed for the public profile.
+
+Invalid/empty responses, a wrong profile ID, or a fetch timeout fail without replacing the existing homepage snapshot. Missing papers are retained pending manual review. Attempts are recorded in `.local/scholar-sync-status.json`; `updated` always describes the successful source snapshot. `--input path/to/gs_data.json` replays a saved snapshot using only cached images/PDFs, with no network requests and no new fetch timestamp.
+
+Normal sync also fills missing illustrations from PDF Figure 1. It resolves arXiv, CVF, OpenReview and Springer paper URLs and explicit PDF links in publisher metadata. It searches the first 12 PDF pages for a Figure 1 caption, groups the vector/raster graphics above it, and renders the entire region (including labels and subpanels) as a PNG. Ambiguous layouts and inaccessible PDFs are reported rather than replaced with arbitrary page screenshots. This is a layout heuristic; review newly generated figures in the local preview.
+
+Manual `image` entries in `_data/publication_overrides.json` always win; an explicit empty `image` disables automatic extraction for that paper. Generated PNGs are stored in `images/publications/`, with source URL, PDF hash, page and crop coordinates in `_data/publication_images.json`. Downloaded PDFs stay in the ignored `.local/publication-pdfs/` cache. Successful images are reused; failed downloads/extractions keep the existing image and do not stop metadata updates or site builds. The image stage has a separate 240-second deadline (`--image-timeout`) and a 64 MiB PDF limit. Per-paper results are in `.local/publication-image-status.json`.
+
+```bash
+bash sync_publications.sh --images-only     # Fill missing figures using the saved Scholar list
+bash sync_publications.sh --skip-images     # Update metadata only; preserve all images
+bash sync_publications.sh --images-only --refresh-images  # Re-download/re-extract automatic figures
+```
+
+For an isolated Ruby installation like the one prepared locally here:
+
+```bash
+env GEM_HOME="$PWD/.local/gems" GEM_PATH="$PWD/.local/gems" gem install bundler -v 2.2.19 --no-document
+env GEM_HOME="$PWD/.local/gems" GEM_PATH="$PWD/.local/gems" BUNDLE_PATH="$PWD/vendor/bundle" .local/gems/bin/bundle install
+```
+
+`scripts/jekyll.sh` uses that environment when available, otherwise your normal Bundler installation. Regression checks: `.venv/bin/python -m unittest discover -s tests -v`.
+
+This is the local pipeline. The legacy citation workflow below still publishes only to `google-scholar-stats`; it has not been migrated to build/deploy this snapshot-based site. Connecting and re-enabling scheduled GitHub publishing is a separate next step. Running local commands never pushes or changes GitHub workflow state.
+
+## Personal pixel favicon
+
+The favicon is a pixel portrait based on the existing profile photo. The generated master is `images/pixel-avatar.png`; the built-in image-generation prompt is saved in `scripts/favicon-prompt.txt`. To export the 16/32 px browser icons, multi-size ICO, Apple touch icon and Android icons on macOS, run `swift scripts/export_favicons.swift`. The exporter uses nearest-neighbor sampling to preserve pixel edges. When replacing the artwork again, update the icon version in `_includes/head/custom.html` and `images/site.webmanifest` to refresh browser caches.
+
+## Original template setup (legacy Scholar workflow)
 
 1. Fork this REPO and rename to `USERNAME.github.io`, where `USERNAME` is your github USERNAME.
 1. Configure the google scholar citation crawler:
@@ -48,12 +95,7 @@ Some examples:
     1. More configuration details are described in the comments.
 1. Add your homepage content in `_pages/about.md`.
     1. You can use html+markdown syntax just same as jekyll.
-    1. You can use a `<span>` tag with class `show_paper_citations` and attribute `data` to display the citations of your paper. Set the data to the google scholar paper ID. For
-        ```html
-        <span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span>
-        ``` 
-        > Q: How to get the google scholar paper ID?   
-        > A: Enter your google scholar homepage and click the paper name. Then you can see the paper ID from `citation_for_view=XXXX`, where `XXXX` is the required paper ID.
+    1. Maintain publication corrections and links in `_data/publication_overrides.json`, then run the local sync command above.
 1. Your page will be published at `https://USERNAME.github.io`.
 
 ## Debug Locally
@@ -67,11 +109,13 @@ Some examples:
 
 ## Export Resume
 
-Run the following command to export a LaTeX resume from `_config.yml` and `_pages/about.md`:
+Run the following command to export a LaTeX resume from `_config.yml`, `_pages/about.md`, and `_data/publications.json`:
 
 ```bash
 ruby scripts/export_resume.rb
 ```
+
+For a source-only check without changing the downloaded CV, use `RESUME_OUTPUT_DIR=.local/resume-check SKIP_PDF=1 ruby scripts/export_resume.rb`. PDF compilation requires a local TeX installation.
 
 The generated files are written to `resume/Mingliang_Zhai_CV.tex` and, when `xelatex` or `latexmk` is installed, `resume/Mingliang_Zhai_CV.pdf`.
 

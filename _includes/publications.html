@@ -1,0 +1,12 @@
+{% assign snapshot = site.data.publications %}
+{% if snapshot.publications.size > 0 %}
+<p class="publication-sync-info">{{ snapshot.publications.size }} publications · {{ snapshot.total_citations }} citations · Updated {{ snapshot.updated | date: "%Y-%m-%d" }} · <a href="{{ site.author.googlescholar | escape }}">Google Scholar</a></p>
+{% for paper in snapshot.publications %}
+{% include publication.html paper=paper %}
+{% endfor %}
+{% else %}
+{% for entry in site.data.publication_overrides %}
+{% assign paper = entry[1] %}
+{% include publication.html paper=paper %}
+{% endfor %}
+{% endif %}
