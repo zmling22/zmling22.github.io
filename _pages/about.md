@@ -14,10 +14,8 @@ I am a Ph.D. candidate at Beijing Institute of Technology (BIT), advised by Prof
 I received my master's degree from Beijing Institute of Technology in 2023 under the supervision of Prof. [Yuwei Wu](https://wu-yuwei-bit.github.io/) and Prof. [Yunde Jia](https://scholar.google.com/citations?user=Sl6TV7gAAAAJ&hl=zh-CN), and my bachelor's degree from Sichuan Normal University in 2018.
 
 My research interests include:
-- Vision-and-Language
-- Multimodal Large Language Models
-- Embodied Intelligence
-- World Model
+- **Embodied Intelligence:** Memory and tool use for embodied question answering, reasoning, and decision-making.
+- **World Model:** Modeling dynamic environments to predict future observations and support long-horizon interaction.
 
 <span class='anchor' id='-educations'></span>
 # 📖 Education
