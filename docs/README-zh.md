@@ -72,15 +72,22 @@ bash sync_publications.sh --images-only --refresh-images  # 重新下载并提�
 RESUME_OUTPUT_DIR=.local/resume-check SKIP_PDF=1 ruby scripts/export_resume.rb
 ```
 
-编译 PDF 仍需安装 XeLaTeX/latexmk。当前只打通本地流程；原有 GitHub 工作流仍将原始数据写到 `google-scholar-stats` 分支，尚未接入新的快照构建和部署流程，也未重新启用定时运行。下方是原模板的配置说明。
+编译 PDF 仍需安装 XeLaTeX/latexmk。
 
-## 原模板配置（旧 Scholar 工作流）
+## GitHub Actions 定时同步
+
+**Sync Publications**（`.github/workflows/sync_publications.yaml`）每周一、周四北京时间 **16:17**（UTC 08:17）运行，间隔 3–4 天。也可以在 Actions → Sync Publications → Run workflow 手动运行。作者 ID 直接读取 `_config.yml` 中的公开 Scholar 链接，不需要额外配置 Scholar secret。
+
+流程依次安装固定版本依赖、执行同步检查、抓取并验证论文数据、从 PDF 补齐 Figure 1 配图，再把论文快照、配图清单及图片提交到 `main`。论文详情和已下载 PDF 会缓存复用。抓取失败时任务报错，保留已发布数据；单篇 PDF 无法下载或提图失败时保留旧图，具体原因显示在运行摘要和诊断 artifact 中。
+
+**Deploy Homepage**（`.github/workflows/pages.yaml`）负责在 `main` 更新后构建和发布。同步任务提交数据后也会显式调用它，因为 `GITHUB_TOKEN` 的提交不会触发普通 push 工作流。仓库 Settings → Pages → Source 应设为 **GitHub Actions**。旧的 `Get Citation Data` 工作流已删除，`google-scholar-stats` 分支不再使用；本地同步命令不会自动推送或部署。
+
+GitHub 定时任务可能延迟启动。公开仓库连续 60 天没有活动时，GitHub 可能暂停定时任务，届时需要在 Actions 重新启用 **Sync Publications**。成功同步会提交新的数据抓取时间，即使论文列表没有变化。
+
+## 主页配置
 
 1. Fork本仓库到`USERNAME/USERNAME.github.io`，其中`USERNAME`是你的github用户名。
-1. 配置谷歌学术引用爬虫：
-    1. 在你的谷歌学术引用页面的url里找到你的谷歌学术ID：例如，在url https://scholar.google.com/citations?user=SCHOLAR_ID 中，`SCHOLAR_ID`部分即为你的谷歌学术ID。
-    1. 在github本仓库页面的`Settings -> Secrets -> Actions -> New repository secret`中，添加`GOOGLE_SCHOLAR_ID`变量：`name=GOOGLE_SCHOLAR_ID`、`value=SCHOLAR_ID`。
-    1. 在github本仓库页面的`Action`中，点击*"I understand my workflows, go ahead and enable them"*启用workflows by clicking *"。本action将会谷歌学术引用的统计量数据`gs_data.json`到本仓库的`google-scholar-stats`分支中。每次修改main分支的内容会触发该action。本action也会在每天08:00 UTC定时触发。
+1. 在 `_config.yml` 的 `author.googlescholar` 中填写公开的 Google Scholar 主页链接。按上方说明启用 **Sync Publications**，并将 Pages 发布来源设为 **GitHub Actions**。
 1. 使用 [favicon-generator](https://redketchup.io/favicon-generator)生成favicon（网页icon文件），并下载所有文件到`REPO/images`。
 1. 修改主页配置文件[_config.yml](../_config.yml):
     1. `title`: 主页标题

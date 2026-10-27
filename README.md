@@ -71,19 +71,24 @@ env GEM_HOME="$PWD/.local/gems" GEM_PATH="$PWD/.local/gems" BUNDLE_PATH="$PWD/ve
 
 `scripts/jekyll.sh` uses that environment when available, otherwise your normal Bundler installation. Regression checks: `.venv/bin/python -m unittest discover -s tests -v`.
 
-This is the local pipeline. The legacy citation workflow below still publishes only to `google-scholar-stats`; it has not been migrated to build/deploy this snapshot-based site. Connecting and re-enabling scheduled GitHub publishing is a separate next step. Running local commands never pushes or changes GitHub workflow state.
+## Scheduled publication sync
+
+**Sync Publications** (`.github/workflows/sync_publications.yaml`) runs on Mondays and Thursdays at 08:17 UTC / 16:17 Asia/Shanghai, with 3–4 days between runs. It can also be started from Actions → Sync Publications → Run workflow. It reads the public Scholar profile from `_config.yml`; no Scholar secret is required.
+
+The workflow installs pinned Python dependencies, checks the sync code, fetches and validates live Scholar data, extracts missing PDF Figure 1 illustrations, and commits `_data/publications.json`, `_data/publication_images.json` and `images/publications/` to `main`. Scholar details and downloaded PDFs are cached. A failed fetch stops the job without publishing incomplete metadata. Individual PDF failures retain existing images and are listed in the run summary and diagnostic artifact.
+
+**Deploy Homepage** (`.github/workflows/pages.yaml`) builds and deploys the site on pushes to `main`. The sync workflow also calls it explicitly after its data commit: commits made with `GITHUB_TOKEN` do not start push workflows. Set Settings → Pages → Source to **GitHub Actions**. The old `Get Citation Data` workflow has been removed; the `google-scholar-stats` branch is no longer used. Local sync commands never push or deploy.
+
+GitHub may delay scheduled starts. If the repository has no activity for 60 days, GitHub can disable its schedule; re-enable **Sync Publications** in Actions if that happens. Successful syncs commit their fresh source timestamp even when the paper list is unchanged.
 
 ## Personal pixel favicon
 
 The favicon is a pixel portrait based on the existing profile photo. The generated master is `images/pixel-avatar.png`; the built-in image-generation prompt is saved in `scripts/favicon-prompt.txt`. To export the 16/32 px browser icons, multi-size ICO, Apple touch icon and Android icons on macOS, run `swift scripts/export_favicons.swift`. The exporter uses nearest-neighbor sampling to preserve pixel edges. When replacing the artwork again, update the icon version in `_includes/head/custom.html` and `images/site.webmanifest` to refresh browser caches.
 
-## Original template setup (legacy Scholar workflow)
+## Site setup
 
 1. Fork this REPO and rename to `USERNAME.github.io`, where `USERNAME` is your github USERNAME.
-1. Configure the google scholar citation crawler:
-    1. Find your google scholar ID in the url of your google scholar page (e.g., https://scholar.google.com/citations?user=SCHOLAR_ID), where `SCHOLAR_ID` is your google scholar ID.
-    1. Set GOOGLE_SCHOLAR_ID variable to your google scholar ID in `Settings -> Secrets -> Actions -> New repository secret` of the REPO website with `name=GOOGLE_SCHOLAR_ID` and `value=SCHOLAR_ID`.
-    1. Click the `Action` of the REPO website and enable the workflows by clicking *"I understand my workflows, go ahead and enable them"*. This github action will generate google scholar citation stats data `gs_data.json` in `google-scholar-stats` branch of your REPO. When you update your main branch, this action will be triggered. This action will also be trigger 08:00 UTC everyday.
+1. Set your public Google Scholar URL in `author.googlescholar` in `_config.yml`. Enable **Sync Publications** in Actions and select **GitHub Actions** as the Pages source, as described above.
 1. Generate favicon using [favicon-generator](https://redketchup.io/favicon-generator) and download all generated files to `REPO/images`.
 1. Modify the configuration of your homepage `_config.yml`:
     1. `title`: the title of your homepage
