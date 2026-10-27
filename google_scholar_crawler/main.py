@@ -4,12 +4,17 @@ import argparse
 import copy
 import sys
 import json
+import logging
 from datetime import datetime, timezone
 import os
 from pathlib import Path
 
 
 def fetch_author(scholar_id, refresh_details=False):
+    # Keep connection errors visible in Actions instead of only reporting
+    # scholarly's generic "Cannot Fetch" message at the end of its retries.
+    logging.basicConfig(level=logging.WARNING, format="%(name)s: %(message)s")
+    scholarly.set_logger(True)
     scholarly.set_timeout(12)
     scholarly.set_retries(1)
     print(f"Fetching Google Scholar profile {scholar_id}...", flush=True)
