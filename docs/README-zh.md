@@ -78,7 +78,7 @@ RESUME_OUTPUT_DIR=.local/resume-check SKIP_PDF=1 ruby scripts/export_resume.rb
 
 **Sync Publications**（`.github/workflows/sync_publications.yaml`）每周一、周四北京时间 **16:17**（UTC 08:17）运行，间隔 3–4 天。也可以在 Actions → Sync Publications → Run workflow 手动运行。作者 ID 直接读取 `_config.yml` 中的公开 Scholar 链接，不需要额外配置 Scholar secret。
 
-流程依次安装固定版本依赖、执行同步检查、抓取并验证论文数据、从 PDF 补齐 Figure 1 配图，再把论文快照、配图清单及图片提交到 `main`。论文详情和已下载 PDF 会缓存复用。抓取失败时任务报错，保留已发布数据；单篇 PDF 无法下载或提图失败时保留旧图，具体原因显示在运行摘要和诊断 artifact 中。
+流程依次安装固定版本依赖、执行同步检查、抓取并验证论文数据、从 PDF 补齐 Figure 1 配图，再把论文快照、配图清单及图片提交到 `main`。论文详情和已下载 PDF 会缓存复用。同步失败后等待 30 秒再重试一次，两次均失败时任务报错，保留已发布数据；单篇 PDF 无法下载或提图失败时保留旧图，具体原因显示在运行摘要和诊断 artifact 中。
 
 **Deploy Homepage**（`.github/workflows/pages.yaml`）负责在 `main` 更新后构建和发布。同步任务提交数据后也会显式调用它，因为 `GITHUB_TOKEN` 的提交不会触发普通 push 工作流。仓库 Settings → Pages → Source 应设为 **GitHub Actions**。旧的 `Get Citation Data` 工作流已删除，`google-scholar-stats` 分支不再使用；本地同步命令不会自动推送或部署。
 

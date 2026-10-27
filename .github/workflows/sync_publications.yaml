@@ -16,7 +16,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: write
     outputs:
@@ -46,7 +46,17 @@ jobs:
           python google_scholar_crawler/main.py --help
           python -m unittest discover -s tests -v
       - name: Fetch publications and extract missing PDF figures
-        run: python scripts/sync_publications.py --timeout 300 --image-timeout 240
+        run: |
+          for attempt in 1 2; do
+            if python scripts/sync_publications.py --timeout 300 --image-timeout 240; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 1 ]; then
+              echo "::warning::Scholar sync failed; retrying once in 30 seconds."
+              sleep 30
+            fi
+          done
+          exit 1
       - name: Save validated publications
         id: commit
         run: |
