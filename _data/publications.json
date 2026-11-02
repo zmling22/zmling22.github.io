@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "scholar_id": "25-QBtwAAAAJ",
-  "updated": "2026-10-27T08:33:24.932400+00:00",
-  "total_citations": 108,
+  "updated": "2026-11-02T18:27:40.551235+00:00",
+  "total_citations": 107,
   "source_count": 13,
   "publications": [
     {
@@ -30,7 +30,7 @@
         "Zihui Gao"
       ],
       "venue": "arXiv preprint arXiv:2607.18367",
-      "citations": 16,
+      "citations": 15,
       "image": "images/publications/eed5b3bd2ffd3db5a1a7-figure-1.png",
       "links": {
         "paper": "https://arxiv.org/abs/2607.18367",
