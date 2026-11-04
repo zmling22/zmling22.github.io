@@ -34,6 +34,8 @@ Some examples:
 
 The homepage now renders `_data/publications.json` at Jekyll build time. Curated titles, authors, venue labels, images and project/code links are stored in `_data/publication_overrides.json`, keyed by Google Scholar publication ID. Other sections remain in `_pages/about.md`.
 
+Scholar sync supplies paper links; it does not discover project pages or code repositories. Add verified links to the matching override's `links` object. An override may contain only `links`, so titles, authors and citation counts can continue to update normally. All configured links survive subsequent syncs.
+
 Set up Python once:
 
 ```bash

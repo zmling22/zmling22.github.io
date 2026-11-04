@@ -63,15 +63,32 @@ class MergeTests(unittest.TestCase):
         first = merge.merge_snapshot(snapshot(), {})
         self.assertEqual(first, merge.merge_snapshot(snapshot(), {}, first))
 
+    def test_link_only_overrides_survive_sync_without_freezing_metadata(self):
+        curated = {PAPER: {"links": {"project": "https://example.org/project",
+                                    "code": "https://example.org/code"}}}
+        previous = merge.merge_snapshot(snapshot(), curated)
+        previous["publications"][0]["image"] = "images/publications/figure.png"
+        newer = snapshot()
+        newer["publications"][PAPER]["bib"]["title"] = "Updated title"
+        newer["publications"][PAPER]["num_citations"] = 5
+        paper = merge.merge_snapshot(newer, curated, previous)["publications"][0]
+        self.assertEqual(paper["title"], "Updated title")
+        self.assertEqual(paper["citations"], 5)
+        self.assertEqual(paper["image"], "images/publications/figure.png")
+        self.assertEqual(paper["links"]["paper"], "https://example.org/paper")
+        for label, url in curated[PAPER]["links"].items():
+            self.assertEqual(paper["links"][label], url)
+
     def test_live_curated_entries_are_all_present(self):
         overrides = merge.read_json(merge.ROOT / "_data/publication_overrides.json")
         data = merge.read_json(merge.ROOT / "_data/publications.json")
         papers = {paper["id"]: paper for paper in data["publications"]}
         for key, curated in overrides.items():
-            self.assertEqual(papers[key]["title"], curated["title"])
-            self.assertEqual(papers[key]["authors"], curated["authors"])
-            self.assertEqual(papers[key]["image"], curated["image"])
-            for label, url in curated["links"].items():
+            self.assertIn(key, papers)
+            for field in ("title", "authors", "venue", "year", "image", "order"):
+                if field in curated:
+                    self.assertEqual(papers[key][field], curated[field])
+            for label, url in curated.get("links", {}).items():
                 self.assertEqual(papers[key]["links"][label], url)
 
 

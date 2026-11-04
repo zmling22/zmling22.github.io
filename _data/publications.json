@@ -34,7 +34,9 @@
       "image": "images/publications/eed5b3bd2ffd3db5a1a7-figure-1.png",
       "links": {
         "paper": "https://arxiv.org/abs/2607.18367",
-        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:_FxGoFyzp5QC"
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:_FxGoFyzp5QC",
+        "project": "https://alaya-lab.github.io/AlayaWorld/",
+        "code": "https://github.com/AlayaLab/AlayaWorld"
       },
       "in_latest_snapshot": true
     },
@@ -60,7 +62,8 @@
       "image": "images/publications/1a4f2ef261ec9921a6b4-figure-1.png",
       "links": {
         "paper": "https://openaccess.thecvf.com/content/CVPR2026/html/Ai_ProSoftArena_Benchmarking_Hierarchical_Capabilities_of_Multi-modal_Agents_in_Professional_Software_CVPR_2026_paper.html",
-        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:YsMSGLbcyi4C"
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:YsMSGLbcyi4C",
+        "project": "https://prosoftarena.github.io/"
       },
       "in_latest_snapshot": true
     },
@@ -81,7 +84,9 @@
       "image": "images/publications/baa3fde3b96092e7a3c1-figure-1.png",
       "links": {
         "paper": "https://arxiv.org/abs/2609.14462",
-        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:LkGwnXOMwfcC"
+        "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:LkGwnXOMwfcC",
+        "project": "https://alaya-lab.github.io/AlayaVista/",
+        "code": "https://github.com/AlayaLab/AlayaVista"
       },
       "in_latest_snapshot": true
     },
@@ -129,6 +134,7 @@
       "links": {
         "paper": "https://arxiv.org/pdf/2505.13948",
         "scholar": "https://scholar.google.com/citations?view_op=view_citation&citation_for_view=25-QBtwAAAAJ:Tyk-4Ss8FVUC",
+        "project": "https://memory-eqa.github.io/",
         "code": "https://github.com/memory-eqa/MemoryEQA"
       },
       "in_latest_snapshot": true,

@@ -1,4 +1,21 @@
 {
+  "25-QBtwAAAAJ:_FxGoFyzp5QC": {
+    "links": {
+      "project": "https://alaya-lab.github.io/AlayaWorld/",
+      "code": "https://github.com/AlayaLab/AlayaWorld"
+    }
+  },
+  "25-QBtwAAAAJ:YsMSGLbcyi4C": {
+    "links": {
+      "project": "https://prosoftarena.github.io/"
+    }
+  },
+  "25-QBtwAAAAJ:LkGwnXOMwfcC": {
+    "links": {
+      "project": "https://alaya-lab.github.io/AlayaVista/",
+      "code": "https://github.com/AlayaLab/AlayaVista"
+    }
+  },
   "25-QBtwAAAAJ:Y0pCki6q_DkC": {
     "title": "Multi-step Reasoning for Embodied Question Answering via Tool Augmentation",
     "authors": [
@@ -36,6 +53,7 @@
     "image": "images/pipeline/zml-arxiv-2505.13948.png",
     "links": {
       "paper": "https://arxiv.org/pdf/2505.13948",
+      "project": "https://memory-eqa.github.io/",
       "code": "https://github.com/memory-eqa/MemoryEQA"
     },
     "order": 1
