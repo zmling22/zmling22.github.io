@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "scholar_id": "25-QBtwAAAAJ",
-  "updated": "2026-11-02T18:27:40.551235+00:00",
-  "total_citations": 107,
+  "updated": "2026-11-16T18:38:05.609423+00:00",
+  "total_citations": 119,
   "source_count": 13,
   "publications": [
     {
@@ -30,7 +30,7 @@
         "Zihui Gao"
       ],
       "venue": "arXiv preprint arXiv:2607.18367",
-      "citations": 15,
+      "citations": 17,
       "image": "images/publications/eed5b3bd2ffd3db5a1a7-figure-1.png",
       "links": {
         "paper": "https://arxiv.org/abs/2607.18367",
@@ -42,7 +42,7 @@
     },
     {
       "id": "25-QBtwAAAAJ:YsMSGLbcyi4C",
-      "title": "Prosoftarena: Benchmarking hierarchical capabilities of multi-modal agents in professional software environments",
+      "title": "ProSoftArena: Benchmarking hierarchical capabilities of multi-modal agents in professional software environments",
       "year": 2026,
       "authors": [
         "Jiaxin Ai",
@@ -129,7 +129,7 @@
         "Yunde Jia"
       ],
       "venue": "ArXiv",
-      "citations": 27,
+      "citations": 33,
       "image": "images/pipeline/zml-arxiv-2505.13948.png",
       "links": {
         "paper": "https://arxiv.org/pdf/2505.13948",
@@ -157,7 +157,7 @@
         "Yunde Jia"
       ],
       "venue": "AAAI 2025",
-      "citations": 12,
+      "citations": 15,
       "image": "images/pipeline/zml-aaai-25.png",
       "links": {
         "paper": "https://arxiv.org/pdf/2412.06324",
@@ -223,7 +223,7 @@
         "Yunde Jia"
       ],
       "venue": "ECCV 2024",
-      "citations": 5,
+      "citations": 6,
       "image": "images/pipeline/lch-eccv-24.png",
       "links": {
         "paper": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06434.pdf",
